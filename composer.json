@@ -1,0 +1,26 @@
+{
+  "name": "cws/development-tools",
+  "description": "Development tools for Shopware local environments",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "version": "1.0.0",
+  "autoload": {
+    "psr-4": {
+      "Cws\\DevelopmentTools\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "CWS",
+      "homepage": "https://www.cws-web.de",
+      "email": "info@cws-web.de"
+    }
+  ],
+  "extra": {
+    "shopware-plugin-class": "Cws\\DevelopmentTools\\CwsDevelopmentTools",
+    "label": {
+      "de-DE": "CWS Development Tools",
+      "en-GB": "CWS Development Tools"
+    }
+  }
+}
