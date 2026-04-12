@@ -23,6 +23,10 @@
             <tag name="controller.service_arguments" />
         </service>
 
+        <service id="Cws\DevelopmentTools\Controller\StorefrontMaintenanceController" public="true">
+            <tag name="controller.service_arguments" />
+        </service>
+
         <service id="Cws\DevelopmentTools\Subscriber\FrontendSubscriber">
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <argument>%kernel.environment%</argument>

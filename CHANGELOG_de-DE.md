@@ -1,3 +1,9 @@
+### [1.2.0] 2026-04-12
+
+- Eine nur in dev aktive, schwebende Storefront-Toolbar mit schnellen Maintenance-Aktionen und Shortcuts wurde hinzugefuegt.
+- Ein Storefront-Bestaetigungsdialog und automatisches Seiten-Refresh nach erfolgreichen Maintenance-Aktionen wurden hinzugefuegt.
+- Toolbar-Styling und Sichtbarkeit der Icons wurden verbessert.
+
 ### [1.1.0] 2026-04-12
 
 - Der Maintenance-Tab wurde mit eigenen Aktionen fuer Cache leeren, Themes kompilieren und OPcache zuruecksetzen hinzugefuegt.

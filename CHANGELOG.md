@@ -1,3 +1,9 @@
+### [1.2.0] 2026-04-12
+
+- Added a dev-only storefront floating toolbar with quick maintenance actions and shortcuts.
+- Added storefront confirmation modal and page refresh after successful maintenance actions.
+- Improved toolbar styling and icon visibility.
+
 ### [1.1.0] 2026-04-12
 
 - Added the Maintenance tab with dedicated actions for cache clear, theme compilation, and OPcache reset.
