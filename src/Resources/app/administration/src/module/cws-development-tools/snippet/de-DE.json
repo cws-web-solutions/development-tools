@@ -1,0 +1,93 @@
+{
+  "cws-development-tools": {
+    "general": {
+      "mainMenuItemGeneral": "CWS Development Tools",
+      "descriptionTextModule": "Entwicklungswerkzeuge für lokale Shopware-Umgebungen."
+    },
+    "index": {
+      "tabs": {
+        "maintenance": "Maintenance",
+        "mediaFallback": "Media Fallback"
+      },
+      "actions": {
+        "reload": "Neu laden",
+        "documentation": "Dokumentation",
+        "clearCache": "Cache leeren",
+        "compileThemes": "Themes kompilieren",
+        "clearOpcache": "OPcache leeren",
+        "saveMediaFallback": "Media Fallback speichern"
+      },
+      "cards": {
+        "maintenance": "Maintenance",
+        "mediaFallback": "Media Fallback",
+        "features": "Verfügbare Funktionen"
+      },
+      "maintenance": {
+        "description": "Führe jede Development-Maintenance direkt in der Administration aus.",
+        "clearCacheTitle": "Cache leeren",
+        "clearCacheDescription": "Leert die Shopware-Caches und invalidiert die zugehörigen Cache-Pools.",
+        "compileThemesTitle": "Themes kompilieren",
+        "compileThemesDescription": "Kompiliert alle zugewiesenen Storefront-Themes synchron.",
+        "clearOpcacheTitle": "OPcache leeren",
+        "clearOpcacheDescription": "Setzt den OPcache der aktuellen Web-Laufzeit zurück.",
+        "environment": "Umgebung",
+        "cacheStatus": "Cache-Status",
+        "cacheCleared": "Cache geleert",
+        "compiledSalesChannels": "Kompilierte Verkaufskanäle",
+        "compiledThemes": "Kompilierte Themes",
+        "opcache": "OPcache",
+        "shortcut": "Shortcut"
+      },
+      "shopInfo": {
+        "environment": "Umgebung",
+        "httpCache": "HTTP-Cache",
+        "cacheAdapter": "Cache-Adapter",
+        "environmentDev": "Development",
+        "environmentProd": "Production",
+        "httpCacheOn": "An",
+        "httpCacheOff": "Aus"
+      },
+      "mediaFallback": {
+        "status": "Status",
+        "environment": "Umgebung",
+        "configKey": "Config-Key",
+        "value": "Aktueller Wert",
+        "source": "Wertquelle",
+        "allowedHosts": "Erlaubte Hosts",
+        "fieldLabel": "Media URL Resolver Host Replace",
+        "fieldHelpText": "Ziel-URL, die fehlende lokale Media-Hosts in Entwicklungsumgebungen ersetzt.",
+        "ready": "Konfiguriert",
+        "legacy": "Legacy-Systemkonfiguration aktiv",
+        "missing": "Nicht konfiguriert",
+        "sourceSystemConfig": "Systemkonfiguration",
+        "sourceLegacy": "Legacy-Systemkonfiguration",
+        "sourceMissing": "Kein Wert konfiguriert"
+      }
+    },
+    "documentation": {
+      "title": "Dokumentation",
+      "actions": {
+        "open": "Dokumentation",
+        "backToPlugins": "Zurück zu den Erweiterungen",
+        "openSettings": "Zur Settings-Seite"
+      },
+      "cards": {
+        "overview": "Übersicht",
+        "actions": "Aktionen",
+        "notes": "Hinweise"
+      }
+    },
+    "shortcuts": {
+      "confirmTitle": "Aktion bestätigen",
+      "confirmCompileThemes": "Alle zugewiesenen Storefront-Themes jetzt kompilieren?",
+      "confirmClearOpcache": "OPcache der aktuellen Web-Laufzeit jetzt zurücksetzen?"
+    },
+    "notifications": {
+      "clearCacheSuccess": "Der Cache wurde erfolgreich geleert.",
+      "compileThemesSuccess": "Die Themes wurden erfolgreich kompiliert.",
+      "clearOpcacheSuccess": "Der OPcache wurde erfolgreich geleert.",
+      "saveMediaFallbackSuccess": "Der Media Fallback wurde erfolgreich gespeichert.",
+      "genericError": "Die Anfrage konnte nicht abgeschlossen werden."
+    }
+  }
+}

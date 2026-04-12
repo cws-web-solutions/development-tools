@@ -1,0 +1,18 @@
+{
+  "../../../config/plugin.png": {
+    "file": "assets/plugin-DD8ZFNPR.png",
+    "src": "../../../config/plugin.png"
+  },
+  "main.js": {
+    "file": "assets/cws-development-tools-DXbwMAad.js",
+    "name": "cws-development-tools",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/cws-development-tools-CmIzixBQ.css"
+    ],
+    "assets": [
+      "assets/plugin-DD8ZFNPR.png"
+    ]
+  }
+}

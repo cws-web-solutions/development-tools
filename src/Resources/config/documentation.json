@@ -1,0 +1,50 @@
+{
+  "title": "CWS Development Tools",
+  "intro": [
+    "Dieses Dokument ist die zentrale Übersicht für alle Funktionen des Plugins.",
+    "Wenn eine neue Entwicklungsfunktion hinzukommt, wird sie hier ergänzt, damit die Dokumentation in der Administration aktuell bleibt."
+  ],
+  "features": [
+    {
+      "key": "maintenance-refresh",
+      "title": "Maintenance",
+      "summary": "Leert Shopware-Caches, kompiliert zugewiesene Storefront-Themes und setzt den OPcache direkt aus der Administration zurück.",
+      "actions": [
+        "Öffne Einstellungen > Erweiterungen > CWS Development Tools.",
+        "Führe Cache leeren, Theme kompilieren oder OPcache leeren gezielt über die einzelnen Aktionen aus.",
+        "Für Shell-Workflows steht zusätzlich bin/console cws:development-tools:refresh bereit."
+      ],
+      "notes": [
+        "Die Funktion steht nur in APP_ENV=dev zur Verfügung.",
+        "Die Aktion in der Administration setzt den OPcache der Web-Laufzeit zurück. Der CLI-Befehl betrifft die CLI-Laufzeit."
+      ]
+    },
+    {
+      "key": "media-fallback",
+      "title": "Media Fallback",
+      "summary": "Ersetzt fehlende lokale Media-URLs in Entwicklungsumgebungen durch einen konfigurierbaren Host.",
+      "actions": [
+        "Trage im Tab Media Fallback die Ziel-URL in das Feld Media URL Resolver Host Replace ein.",
+        "Speichere die Einstellung direkt über die Seite CWS Development Tools."
+      ],
+      "notes": [
+        "Der Fallback läuft nur in APP_ENV=dev und nur auf erlaubten Hosts wie ddev.site und ngrok-free.app.",
+        "Vorhandene Werte aus DisMediaUrlResolverLocalDevelopment.config.MediaUrlResolverHostReplace werden weiterhin als Fallback berücksichtigt."
+      ]
+    },
+    {
+      "key": "global-shortcuts",
+      "title": "Globale Shortcuts",
+      "summary": "Führt Development-Aktionen direkt aus jeder Stelle der Administration aus.",
+      "actions": [
+        "Nutze Alt+C für Cache leeren über den nativen Shopware-Shortcut.",
+        "Nutze Alt+T für Themes kompilieren.",
+        "Nutze Alt+O für OPcache leeren."
+      ],
+      "notes": [
+        "Auf dem Mac verwendet Shopware statt Alt die Taste Ctrl als System-Key.",
+        "Die Shortcuts werden nur ausgeführt, wenn der aktuelle Benutzer system.plugin_maintain verwenden darf."
+      ]
+    }
+  ]
+}

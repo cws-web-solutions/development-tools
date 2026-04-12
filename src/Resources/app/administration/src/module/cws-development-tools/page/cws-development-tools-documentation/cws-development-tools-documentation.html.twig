@@ -1,0 +1,52 @@
+{% block cws_development_tools_documentation %}
+<sw-page class="cws-development-tools-documentation" :smart-bar-loader="isLoading">
+    <template #smart-bar-header>
+        <h2>{{ $tc('cws-development-tools.documentation.title') }}</h2>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button @click="goToPlugins">
+            {{ $tc('cws-development-tools.documentation.actions.backToPlugins') }}
+        </sw-button>
+        <sw-button @click="goToSettings">
+            {{ $tc('cws-development-tools.documentation.actions.openSettings') }}
+        </sw-button>
+    </template>
+
+    <template #content>
+        <sw-card-view>
+            <sw-card :title="documentation.title || $tc('cws-development-tools.documentation.cards.overview')">
+                <p v-for="(paragraph, index) in (documentation.intro || [])" :key="index">
+                    {{ paragraph }}
+                </p>
+            </sw-card>
+
+            <sw-card
+                v-for="feature in features"
+                :key="feature.key"
+                :title="feature.title"
+            >
+                <p>{{ feature.summary }}</p>
+
+                <div v-if="feature.actions && feature.actions.length > 0" class="cws-development-tools-documentation__section">
+                    <h3>{{ $tc('cws-development-tools.documentation.cards.actions') }}</h3>
+                    <ul class="cws-development-tools-documentation__list">
+                        <li v-for="action in feature.actions" :key="action">
+                            {{ action }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div v-if="feature.notes && feature.notes.length > 0" class="cws-development-tools-documentation__section">
+                    <h3>{{ $tc('cws-development-tools.documentation.cards.notes') }}</h3>
+                    <ul class="cws-development-tools-documentation__list">
+                        <li v-for="note in feature.notes" :key="note">
+                            {{ note }}
+                        </li>
+                    </ul>
+                </div>
+            </sw-card>
+        </sw-card-view>
+    </template>
+</sw-page>
+{% endblock %}

@@ -1,0 +1,175 @@
+{% block cws_development_tools_index %}
+	<sw-page class="cws-development-tools-index" :smart-bar-loader="isLoading">
+		<template #smart-bar-header>
+			<h2>{{ $tc('cws-development-tools.general.mainMenuItemGeneral') }}</h2>
+		</template>
+
+		<template #smart-bar-actions>
+			<sw-button :disabled="isLoading || isBusy" @click="loadState">
+				{{ $tc('cws-development-tools.index.actions.reload') }}
+			</sw-button>
+
+			<sw-button @click="goToDocumentation">
+				{{ $tc('cws-development-tools.index.actions.documentation') }}
+			</sw-button>
+		</template>
+
+		<template #content>
+			<sw-card-view>
+				<sw-tabs default-item="maintenance" position-identifier="cws-development-tools-tabs">
+					<template #default="{ active }">
+						<sw-tabs-item v-bind="$props" name="maintenance" :active-tab="active">
+							{{ $tc('cws-development-tools.index.tabs.maintenance') }}
+						</sw-tabs-item>
+
+						<sw-tabs-item v-bind="$props" name="media-fallback" :active-tab="active">
+							{{ $tc('cws-development-tools.index.tabs.mediaFallback') }}
+						</sw-tabs-item>
+					</template>
+
+					<template #content="{ active }">
+						<template v-if="active === 'maintenance'">
+							<sw-card :title="$tc('cws-development-tools.index.cards.maintenance')">
+								<p>{{ $tc('cws-development-tools.index.maintenance.description') }}</p>
+
+								<div class="cws-development-tools-index__shop-info-box">
+									<div class="cws-development-tools-index__shop-info-item">
+										<strong>{{ $tc('cws-development-tools.index.shopInfo.environment') }}</strong>
+										<span>{{ shopEnvironmentLabel }}</span>
+									</div>
+
+									<div class="cws-development-tools-index__shop-info-item">
+										<strong>{{ $tc('cws-development-tools.index.shopInfo.httpCache') }}</strong>
+										<span>{{ shopHttpCacheLabel }}</span>
+									</div>
+
+									<div class="cws-development-tools-index__shop-info-item">
+										<strong>{{ $tc('cws-development-tools.index.shopInfo.cacheAdapter') }}</strong>
+										<span>{{ shopCacheAdapterLabel }}</span>
+									</div>
+								</div>
+
+								<div class="cws-development-tools-index__action-grid">
+									<div class="cws-development-tools-index__action-box">
+										<div class="cws-development-tools-index__action-main">
+											<h3>{{ $tc('cws-development-tools.index.maintenance.clearCacheTitle') }}</h3>
+											<p>{{ $tc('cws-development-tools.index.maintenance.clearCacheDescription') }}</p>
+										</div>
+
+										<div class="cws-development-tools-index__action-controls">
+											<small class="cws-development-tools-index__shortcut-label">
+												{{ $tc('cws-development-tools.index.maintenance.shortcut') }}
+												<code>{{ formatShortcut('C') }}</code>
+											</small>
+											<sw-button variant="primary" :is-loading="isClearingCache" :disabled="isLoading || isBusy" @click="onClearCache">
+												{{ $tc('cws-development-tools.index.actions.clearCache') }}
+											</sw-button>
+										</div>
+
+										<div class="cws-development-tools-index__result-box" v-if="maintenanceResults.clearCache">
+											<p>
+												<strong>{{ $tc('cws-development-tools.index.maintenance.environment') }}:</strong>
+												{{ maintenanceResults.clearCache.environment }}</p>
+											<p>
+												<strong>{{ $tc('cws-development-tools.index.maintenance.cacheStatus') }}:</strong>
+												{{ $tc('cws-development-tools.index.maintenance.cacheCleared') }}</p>
+										</div>
+									</div>
+
+									<div class="cws-development-tools-index__action-box">
+										<div class="cws-development-tools-index__action-main">
+											<h3>{{ $tc('cws-development-tools.index.maintenance.compileThemesTitle') }}</h3>
+											<p>{{ $tc('cws-development-tools.index.maintenance.compileThemesDescription') }}</p>
+										</div>
+
+										<div class="cws-development-tools-index__action-controls">
+											<small class="cws-development-tools-index__shortcut-label">
+												{{ $tc('cws-development-tools.index.maintenance.shortcut') }}
+												<code>{{ formatShortcut('T') }}</code>
+											</small>
+											<sw-button variant="primary" :is-loading="isCompilingThemes" :disabled="isLoading || isBusy" @click="onCompileThemes">
+												{{ $tc('cws-development-tools.index.actions.compileThemes') }}
+											</sw-button>
+										</div>
+
+										<div class="cws-development-tools-index__result-box" v-if="maintenanceResults.compileThemes">
+											<p>
+												<strong>{{ $tc('cws-development-tools.index.maintenance.environment') }}:</strong>
+												{{ maintenanceResults.compileThemes.environment }}</p>
+											<p>
+												<strong>{{ $tc('cws-development-tools.index.maintenance.compiledSalesChannels') }}:</strong>
+												{{ maintenanceResults.compileThemes.compiledSalesChannelIds.length }}</p>
+											<p>
+												<strong>{{ $tc('cws-development-tools.index.maintenance.compiledThemes') }}:</strong>
+												{{ maintenanceResults.compileThemes.compiledThemeIds.length }}</p>
+										</div>
+									</div>
+
+									<div class="cws-development-tools-index__action-box">
+										<div class="cws-development-tools-index__action-main">
+											<h3>{{ $tc('cws-development-tools.index.maintenance.clearOpcacheTitle') }}</h3>
+											<p>{{ $tc('cws-development-tools.index.maintenance.clearOpcacheDescription') }}</p>
+										</div>
+
+										<div class="cws-development-tools-index__action-controls">
+											<small class="cws-development-tools-index__shortcut-label">
+												{{ $tc('cws-development-tools.index.maintenance.shortcut') }}
+												<code>{{ formatShortcut('O') }}</code>
+											</small>
+											<sw-button variant="primary" :is-loading="isClearingOpcache" :disabled="isLoading || isBusy" @click="onClearOpcache">
+												{{ $tc('cws-development-tools.index.actions.clearOpcache') }}
+											</sw-button>
+										</div>
+
+										<div class="cws-development-tools-index__result-box" v-if="maintenanceResults.clearOpcache">
+											<p>
+												<strong>{{ $tc('cws-development-tools.index.maintenance.environment') }}:</strong>
+												{{ maintenanceResults.clearOpcache.environment }}</p>
+											<p>
+												<strong>{{ $tc('cws-development-tools.index.maintenance.opcache') }}:</strong>
+												{{ maintenanceResults.clearOpcache.opcache.message }}</p>
+										</div>
+									</div>
+								</div>
+							</sw-card>
+						</template>
+
+						<template v-if="active === 'media-fallback'">
+							<sw-card :title="$tc('cws-development-tools.index.cards.mediaFallback')">
+								<sw-url-field v-model:value="mediaFallbackForm.host" :label="$tc('cws-development-tools.index.mediaFallback.fieldLabel')" :helptext="$tc('cws-development-tools.index.mediaFallback.fieldHelpText')" placeholder="https://example.com"/>
+
+								<div class="cws-development-tools-index__button-row">
+									<sw-button variant="primary" :is-loading="isSavingMediaFallback" :disabled="isLoading || isBusy" @click="onSaveMediaFallback">
+										{{ $tc('cws-development-tools.index.actions.saveMediaFallback') }}
+									</sw-button>
+								</div>
+
+								<div class="cws-development-tools-index__status-box">
+									<p>
+										<strong>{{ $tc('cws-development-tools.index.mediaFallback.status') }}:</strong>
+										{{ mediaFallbackStatusLabel }}</p>
+									<p>
+										<strong>{{ $tc('cws-development-tools.index.mediaFallback.environment') }}:</strong>
+										{{ environment || '-' }}</p>
+									<p>
+										<strong>{{ $tc('cws-development-tools.index.mediaFallback.configKey') }}:</strong>
+										<code>{{ mediaFallback.configKey }}</code>
+									</p>
+									<p>
+										<strong>{{ $tc('cws-development-tools.index.mediaFallback.value') }}:</strong>
+										{{ mediaFallback.host || '-' }}</p>
+									<p>
+										<strong>{{ $tc('cws-development-tools.index.mediaFallback.source') }}:</strong>
+										{{ mediaFallbackSourceLabel }}</p>
+									<p>
+										<strong>{{ $tc('cws-development-tools.index.mediaFallback.allowedHosts') }}:</strong>
+										{{ (mediaFallback.allowedHosts || []).join(', ') }}</p>
+								</div>
+							</sw-card>
+						</template>
+					</template>
+				</sw-tabs>
+			</sw-card-view>
+		</template>
+	</sw-page>
+{% endblock %}

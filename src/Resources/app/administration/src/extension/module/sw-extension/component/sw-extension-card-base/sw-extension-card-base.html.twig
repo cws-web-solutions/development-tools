@@ -1,0 +1,10 @@
+{% block sw_extension_card_base_context_menu_actions_additional %}
+    {% parent %}
+
+    <sw-context-menu-item
+        v-if="isCwsDevelopmentToolsExtension"
+        :router-link="{ name: 'cws.development.tools.documentation' }"
+    >
+        {{ $t('cws-development-tools.documentation.actions.open') }}
+    </sw-context-menu-item>
+{% endblock %}

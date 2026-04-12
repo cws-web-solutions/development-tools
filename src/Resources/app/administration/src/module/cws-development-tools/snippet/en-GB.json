@@ -1,0 +1,92 @@
+{
+  "cws-development-tools": {
+    "general": {
+      "mainMenuItemGeneral": "CWS Development Tools",
+      "descriptionTextModule": "Developer utilities for local Shopware environments."
+    },
+    "index": {
+      "tabs": {
+        "maintenance": "Maintenance",
+        "mediaFallback": "Media Fallback"
+      },
+      "actions": {
+        "reload": "Reload",
+        "documentation": "Documentation",
+        "clearCache": "Clear cache",
+        "compileThemes": "Compile themes",
+        "clearOpcache": "Clear OPcache",
+        "saveMediaFallback": "Save media fallback"
+      },
+      "cards": {
+        "maintenance": "Maintenance",
+        "mediaFallback": "Media Fallback"
+      },
+      "maintenance": {
+        "description": "Run each development maintenance action directly in the administration.",
+        "clearCacheTitle": "Clear cache",
+        "clearCacheDescription": "Clears Shopware caches and invalidates the related cache pools.",
+        "compileThemesTitle": "Compile themes",
+        "compileThemesDescription": "Compiles all assigned storefront themes synchronously.",
+        "clearOpcacheTitle": "Clear OPcache",
+        "clearOpcacheDescription": "Resets OPcache in the current web runtime.",
+        "environment": "Environment",
+        "cacheStatus": "Cache status",
+        "cacheCleared": "Cache cleared",
+        "compiledSalesChannels": "Compiled sales channels",
+        "compiledThemes": "Compiled themes",
+        "opcache": "OPcache",
+        "shortcut": "Shortcut"
+      },
+      "shopInfo": {
+        "environment": "Environment",
+        "httpCache": "HTTP cache",
+        "cacheAdapter": "Cache adapter",
+        "environmentDev": "Development",
+        "environmentProd": "Production",
+        "httpCacheOn": "On",
+        "httpCacheOff": "Off"
+      },
+      "mediaFallback": {
+        "status": "Status",
+        "environment": "Environment",
+        "configKey": "Config key",
+        "value": "Current value",
+        "source": "Value source",
+        "allowedHosts": "Allowed hosts",
+        "fieldLabel": "Media URL Resolver Host Replace",
+        "fieldHelpText": "Target URL that should replace missing local media hosts in development.",
+        "ready": "Configured",
+        "legacy": "Using legacy config fallback",
+        "missing": "Not configured",
+        "sourceSystemConfig": "System config",
+        "sourceLegacy": "Legacy system config",
+        "sourceMissing": "No value configured"
+      }
+    },
+    "documentation": {
+      "title": "Documentation",
+      "actions": {
+        "open": "Documentation",
+        "backToPlugins": "Back to plugins",
+        "openSettings": "Open settings page"
+      },
+      "cards": {
+        "overview": "Overview",
+        "actions": "Actions",
+        "notes": "Notes"
+      }
+    },
+    "shortcuts": {
+      "confirmTitle": "Confirm action",
+      "confirmCompileThemes": "Compile all assigned storefront themes now?",
+      "confirmClearOpcache": "Reset OPcache in the current web runtime now?"
+    },
+    "notifications": {
+      "clearCacheSuccess": "Cache cleared successfully.",
+      "compileThemesSuccess": "Themes compiled successfully.",
+      "clearOpcacheSuccess": "OPcache reset successfully.",
+      "saveMediaFallbackSuccess": "Media fallback saved successfully.",
+      "genericError": "The request could not be completed."
+    }
+  }
+}

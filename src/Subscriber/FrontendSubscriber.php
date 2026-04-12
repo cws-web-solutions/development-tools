@@ -16,6 +16,7 @@ use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Shopware\Core\Framework\DataAbstractionLayer\Event\EntityLoadedEvent;
+use Cws\DevelopmentTools\Service\DevelopmentToolsInfoService;
 
 class FrontendSubscriber implements EventSubscriberInterface
 {
@@ -60,10 +61,16 @@ class FrontendSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $mediaUrlResolverHostReplace = $this->systemConfigService->get('CwsDevelopmentTools.config.MediaUrlResolverHostReplace');
-        if (!$mediaUrlResolverHostReplace) {
+        $mediaUrlResolverHostReplace = $this->systemConfigService->get(DevelopmentToolsInfoService::MEDIA_FALLBACK_CONFIG);
+        if (!\is_string($mediaUrlResolverHostReplace) || trim($mediaUrlResolverHostReplace) === '') {
             $mediaUrlResolverHostReplace = $this->systemConfigService->get('DisMediaUrlResolverLocalDevelopment.config.MediaUrlResolverHostReplace');
         }
+
+        if (!\is_string($mediaUrlResolverHostReplace) || trim($mediaUrlResolverHostReplace) === '') {
+            return;
+        }
+
+        $mediaUrlResolverHostReplace = rtrim($mediaUrlResolverHostReplace, '/');
 
         /** @var MediaCollection $medias */
         $medias = $event->getEntities();

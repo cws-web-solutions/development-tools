@@ -1,0 +1,15 @@
+<div class="cws-development-tools-shortcuts">
+	<sw-modal v-if="isConfirmModalOpen" variant="small" :title="$tc('cws-development-tools.shortcuts.confirmTitle')" @modal-close="closeShortcutConfirmation">
+		{{ getShortcutConfirmationMessage() }}
+
+		<template #modal-footer>
+			<sw-button size="small" @click="closeShortcutConfirmation">
+				{{ $tc('global.default.cancel') }}
+			</sw-button>
+
+			<sw-button variant="primary" size="small" @click="confirmShortcutAction">
+				{{ $tc('global.default.confirm') }}
+			</sw-button>
+		</template>
+	</sw-modal>
+</div>

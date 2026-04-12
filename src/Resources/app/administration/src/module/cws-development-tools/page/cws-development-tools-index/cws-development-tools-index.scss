@@ -1,0 +1,115 @@
+.cws-development-tools-index__button-row {
+  margin-top: 16px;
+}
+
+.cws-development-tools-index__button-row .sw-button {
+  margin-right: 12px;
+}
+
+.cws-development-tools-index__action-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.cws-development-tools-index__action-box {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #d1d9e0;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.cws-development-tools-index__action-main {
+  min-width: 0;
+}
+
+.cws-development-tools-index__action-box h3 {
+  margin: 0 0 8px;
+}
+
+.cws-development-tools-index__action-box p {
+  margin: 0;
+}
+
+.cws-development-tools-index__action-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.cws-development-tools-index__shortcut-label {
+  color: #52667a;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cws-development-tools-index__shortcut-label code {
+  border: 1px solid #d1d9e0;
+  border-radius: 4px;
+  padding: 2px 6px;
+  background: #eef3f9;
+  font-size: 12px;
+}
+
+.cws-development-tools-index__shop-info-box {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  border: 1px solid #d1d9e0;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.cws-development-tools-index__shop-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cws-development-tools-index__shop-info-item span {
+  color: #0f172a;
+}
+
+.cws-development-tools-index__result-box,
+.cws-development-tools-index__status-box {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #d1d9e0;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.cws-development-tools-index__result-box p,
+.cws-development-tools-index__status-box p {
+  margin: 0;
+}
+
+.cws-development-tools-index__result-box p + p,
+.cws-development-tools-index__status-box p + p {
+  margin-top: 8px;
+}
+
+@media screen and (max-width: 1279px) {
+  .cws-development-tools-index__shop-info-box {
+    grid-template-columns: 1fr;
+  }
+
+  .cws-development-tools-index__action-box {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+  }
+
+  .cws-development-tools-index__action-controls {
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/cwsdevelopmenttools/administration/",
+  "entryPoints": {
+    "cws-development-tools": {
+      "css": [
+        "/bundles/cwsdevelopmenttools/administration/assets/cws-development-tools-CmIzixBQ.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/cwsdevelopmenttools/administration/assets/cws-development-tools-DXbwMAad.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}
