@@ -32,11 +32,11 @@ export default class CwsDevelopmentToolsApiService {
       .then((response) => response.data.data);
   }
 
-  saveMediaFallback(host) {
+  saveMediaFallback(host, enabled) {
     return this.httpClient
       .post(
         "/_action/cws-development-tools/media-fallback",
-        { host },
+        { host, enabled },
         {
           headers: this.getAuthHeaders(),
         },

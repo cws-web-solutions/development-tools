@@ -26,6 +26,7 @@ Component.register("cws-development-tools-index", {
       },
       mediaFallbackForm: {
         host: "",
+        enabled: false,
       },
     };
   },
@@ -46,6 +47,10 @@ Component.register("cws-development-tools-index", {
 
     environment() {
       return this.state?.environment ?? "";
+    },
+
+    maintenanceAvailable() {
+      return this.state?.maintenance?.available === true;
     },
 
     shopEnvironmentLabel() {
@@ -73,8 +78,18 @@ Component.register("cws-development-tools-index", {
     },
 
     mediaFallbackStatusLabel() {
-      if (!this.mediaFallback.enabled) {
+      if (!this.mediaFallback.configured) {
         return this.$tc("cws-development-tools.index.mediaFallback.missing");
+      }
+
+      if (!this.mediaFallback.enabled) {
+        return this.$tc("cws-development-tools.index.mediaFallback.disabled");
+      }
+
+      if (!this.mediaFallback.active) {
+        return this.$tc(
+          "cws-development-tools.index.mediaFallback.inactiveForEnvironment",
+        );
       }
 
       if (this.mediaFallback.source === "legacy-system-config") {
@@ -124,6 +139,8 @@ Component.register("cws-development-tools-index", {
         this.state = stateResponse;
         this.cacheInfo = cacheInfoResponse?.data ?? null;
         this.mediaFallbackForm.host = this.state?.mediaFallback?.host ?? "";
+        this.mediaFallbackForm.enabled =
+          this.state?.mediaFallback?.enabled === true;
       } catch (error) {
         this.createNotificationError({
           message: this.getErrorMessage(error),
@@ -157,6 +174,10 @@ Component.register("cws-development-tools-index", {
     },
 
     async onCompileThemes() {
+      if (!this.maintenanceAvailable) {
+        return;
+      }
+
       this.isCompilingThemes = true;
 
       try {
@@ -177,6 +198,10 @@ Component.register("cws-development-tools-index", {
     },
 
     async onClearOpcache() {
+      if (!this.maintenanceAvailable) {
+        return;
+      }
+
       this.isClearingOpcache = true;
 
       try {
@@ -202,8 +227,11 @@ Component.register("cws-development-tools-index", {
       try {
         this.state = await this.cwsDevelopmentToolsApiService.saveMediaFallback(
           this.mediaFallbackForm.host,
+          this.mediaFallbackForm.enabled,
         );
         this.mediaFallbackForm.host = this.state?.mediaFallback?.host ?? "";
+        this.mediaFallbackForm.enabled =
+          this.state?.mediaFallback?.enabled === true;
         this.createNotificationSuccess({
           message: this.$tc(
             "cws-development-tools.notifications.saveMediaFallbackSuccess",

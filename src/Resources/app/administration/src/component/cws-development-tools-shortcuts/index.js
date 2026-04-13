@@ -30,12 +30,13 @@ Component.register("cws-development-tools-shortcuts", {
       isClearingOpcache: false,
       isConfirmModalOpen: false,
       pendingShortcutAction: null,
+      environment: "",
     };
   },
 
   computed: {
     canUseShortcuts() {
-      return this.acl.can("system.plugin_maintain");
+      return this.acl.can("system.plugin_maintain") && this.environment === "dev";
     },
 
     isBusy() {
@@ -54,6 +55,7 @@ Component.register("cws-development-tools-shortcuts", {
   methods: {
     createdComponent() {
       document.addEventListener("keydown", this.keydownEventListener);
+      this.loadState();
     },
 
     beforeUnmountComponent() {
@@ -61,7 +63,7 @@ Component.register("cws-development-tools-shortcuts", {
     },
 
     keydownEventListener(event) {
-      if (this.$device.getSystemKey() !== "ALT") {
+      if (this.$device.getSystemKey() !== "ALT" || !this.canUseShortcuts) {
         return;
       }
 
@@ -110,6 +112,15 @@ Component.register("cws-development-tools-shortcuts", {
       }
 
       return "";
+    },
+
+    async loadState() {
+      try {
+        const state = await this.cwsDevelopmentToolsApiService.loadState();
+        this.environment = state?.environment ?? "";
+      } catch (error) {
+        this.environment = "";
+      }
     },
 
     async compileThemesShortcut() {

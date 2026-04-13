@@ -141,10 +141,14 @@ final class MaintenanceController extends AbstractController
             throw new BadRequestHttpException('The "host" field must be a string or null.');
         }
 
+        $enabled = array_key_exists('enabled', $payload)
+            ? $this->resolveBoolean($payload, 'enabled', false)
+            : ($this->developmentToolsInfoService->getState()['mediaFallback']['enabled'] ?? false);
+
         return new JsonResponse([
             'success' => true,
             'message' => 'Media fallback setting saved.',
-            'data' => $this->developmentToolsInfoService->saveMediaFallbackHost($host),
+            'data' => $this->developmentToolsInfoService->saveMediaFallback($host, $enabled),
         ]);
     }
 

@@ -7,6 +7,7 @@ use Shopware\Core\System\SystemConfig\SystemConfigService;
 final class DevelopmentToolsInfoService
 {
     public const MEDIA_FALLBACK_CONFIG = 'CwsDevelopmentTools.config.MediaUrlResolverHostReplace';
+    public const MEDIA_FALLBACK_ENABLED_CONFIG = 'CwsDevelopmentTools.config.MediaUrlResolverEnabled';
     private const LEGACY_MEDIA_FALLBACK_CONFIG = 'DisMediaUrlResolverLocalDevelopment.config.MediaUrlResolverHostReplace';
 
     public function __construct(
@@ -21,11 +22,14 @@ final class DevelopmentToolsInfoService
      *     maintenance: array{available: bool},
      *     mediaFallback: array{
      *         enabled: bool,
+     *         configured: bool,
+     *         active: bool,
      *         host: ?string,
      *         source: string,
      *         configKey: string,
+     *         enabledConfigKey: string,
      *         legacyConfigKey: string,
-     *         allowedHosts: list<string>
+     *         hostScope: string
      *     },
      *     documentation: array<string, mixed>
      * }
@@ -35,6 +39,8 @@ final class DevelopmentToolsInfoService
         $configuredHost = $this->normalizeString($this->systemConfigService->get(self::MEDIA_FALLBACK_CONFIG));
         $legacyHost = $this->normalizeString($this->systemConfigService->get(self::LEGACY_MEDIA_FALLBACK_CONFIG));
         $mediaFallbackHost = $configuredHost ?? $legacyHost;
+        $mediaFallbackConfigured = $mediaFallbackHost !== null;
+        $mediaFallbackEnabled = $this->resolveMediaFallbackEnabled($mediaFallbackConfigured);
         $mediaFallbackSource = $configuredHost !== null
             ? 'system-config'
             : ($legacyHost !== null ? 'legacy-system-config' : 'missing');
@@ -45,12 +51,15 @@ final class DevelopmentToolsInfoService
                 'available' => $this->environment === 'dev',
             ],
             'mediaFallback' => [
-                'enabled' => $mediaFallbackHost !== null,
+                'enabled' => $mediaFallbackEnabled,
+                'configured' => $mediaFallbackConfigured,
+                'active' => $mediaFallbackConfigured && $mediaFallbackEnabled && $this->environment === 'dev',
                 'host' => $mediaFallbackHost,
                 'source' => $mediaFallbackSource,
                 'configKey' => self::MEDIA_FALLBACK_CONFIG,
+                'enabledConfigKey' => self::MEDIA_FALLBACK_ENABLED_CONFIG,
                 'legacyConfigKey' => self::LEGACY_MEDIA_FALLBACK_CONFIG,
-                'allowedHosts' => ['ddev.site', 'ngrok-free.app'],
+                'hostScope' => 'APP_ENV=dev',
             ],
             'documentation' => $this->loadDocumentation(),
         ];
@@ -59,12 +68,13 @@ final class DevelopmentToolsInfoService
     /**
      * @return array<string, mixed>
      */
-    public function saveMediaFallbackHost(?string $host): array
+    public function saveMediaFallback(?string $host, bool $enabled): array
     {
         $normalizedHost = $this->normalizeString($host);
 
         $this->systemConfigService->set(self::MEDIA_FALLBACK_CONFIG, $normalizedHost);
         $this->systemConfigService->set(self::LEGACY_MEDIA_FALLBACK_CONFIG, $normalizedHost);
+        $this->systemConfigService->set(self::MEDIA_FALLBACK_ENABLED_CONFIG, $enabled);
 
         return $this->getState();
     }
@@ -114,5 +124,28 @@ final class DevelopmentToolsInfoService
         $value = trim($value);
 
         return $value === '' ? null : rtrim($value, '/');
+    }
+
+    private function resolveMediaFallbackEnabled(bool $mediaFallbackConfigured): bool
+    {
+        $configuredValue = $this->normalizeBoolean($this->systemConfigService->get(self::MEDIA_FALLBACK_ENABLED_CONFIG));
+        if ($configuredValue !== null) {
+            return $configuredValue;
+        }
+
+        return $mediaFallbackConfigured;
+    }
+
+    private function normalizeBoolean(mixed $value): ?bool
+    {
+        if (\is_bool($value)) {
+            return $value;
+        }
+
+        if (\is_scalar($value)) {
+            return filter_var($value, \FILTER_VALIDATE_BOOLEAN, \FILTER_NULL_ON_FAILURE);
+        }
+
+        return null;
     }
 }

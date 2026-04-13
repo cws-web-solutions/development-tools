@@ -31,6 +31,9 @@
 						<template v-if="active === 'maintenance'">
 							<sw-card :title="$tc('cws-development-tools.index.cards.maintenance')">
 								<p>{{ $tc('cws-development-tools.index.maintenance.description') }}</p>
+								<p v-if="!maintenanceAvailable" class="cws-development-tools-index__maintenance-note">
+									{{ $tc('cws-development-tools.index.maintenance.devOnlyNotice') }}
+								</p>
 
 								<div class="cws-development-tools-index__shop-info-box">
 									<div class="cws-development-tools-index__shop-info-item">
@@ -87,7 +90,7 @@
 												{{ $tc('cws-development-tools.index.maintenance.shortcut') }}
 												<code>{{ formatShortcut('T') }}</code>
 											</small>
-											<sw-button variant="primary" :is-loading="isCompilingThemes" :disabled="isLoading || isBusy" @click="onCompileThemes">
+											<sw-button variant="primary" :is-loading="isCompilingThemes" :disabled="isLoading || isBusy || !maintenanceAvailable" @click="onCompileThemes">
 												{{ $tc('cws-development-tools.index.actions.compileThemes') }}
 											</sw-button>
 										</div>
@@ -116,7 +119,7 @@
 												{{ $tc('cws-development-tools.index.maintenance.shortcut') }}
 												<code>{{ formatShortcut('O') }}</code>
 											</small>
-											<sw-button variant="primary" :is-loading="isClearingOpcache" :disabled="isLoading || isBusy" @click="onClearOpcache">
+											<sw-button variant="primary" :is-loading="isClearingOpcache" :disabled="isLoading || isBusy || !maintenanceAvailable" @click="onClearOpcache">
 												{{ $tc('cws-development-tools.index.actions.clearOpcache') }}
 											</sw-button>
 										</div>
@@ -136,6 +139,12 @@
 
 						<template v-if="active === 'media-fallback'">
 							<sw-card :title="$tc('cws-development-tools.index.cards.mediaFallback')">
+								<sw-switch-field
+									v-model:value="mediaFallbackForm.enabled"
+									:label="$tc('cws-development-tools.index.mediaFallback.enabledLabel')"
+									:help-text="$tc('cws-development-tools.index.mediaFallback.enabledHelpText')"
+								/>
+
 								<sw-url-field v-model:value="mediaFallbackForm.host" :label="$tc('cws-development-tools.index.mediaFallback.fieldLabel')" :helptext="$tc('cws-development-tools.index.mediaFallback.fieldHelpText')" placeholder="https://example.com"/>
 
 								<div class="cws-development-tools-index__button-row">
@@ -152,8 +161,15 @@
 										<strong>{{ $tc('cws-development-tools.index.mediaFallback.environment') }}:</strong>
 										{{ environment || '-' }}</p>
 									<p>
+										<strong>{{ $tc('cws-development-tools.index.mediaFallback.enabledState') }}:</strong>
+										{{ mediaFallback.enabled ? $tc('cws-development-tools.index.mediaFallback.yes') : $tc('cws-development-tools.index.mediaFallback.no') }}</p>
+									<p>
 										<strong>{{ $tc('cws-development-tools.index.mediaFallback.configKey') }}:</strong>
 										<code>{{ mediaFallback.configKey }}</code>
+									</p>
+									<p>
+										<strong>{{ $tc('cws-development-tools.index.mediaFallback.enabledConfigKey') }}:</strong>
+										<code>{{ mediaFallback.enabledConfigKey }}</code>
 									</p>
 									<p>
 										<strong>{{ $tc('cws-development-tools.index.mediaFallback.value') }}:</strong>
@@ -162,8 +178,8 @@
 										<strong>{{ $tc('cws-development-tools.index.mediaFallback.source') }}:</strong>
 										{{ mediaFallbackSourceLabel }}</p>
 									<p>
-										<strong>{{ $tc('cws-development-tools.index.mediaFallback.allowedHosts') }}:</strong>
-										{{ (mediaFallback.allowedHosts || []).join(', ') }}</p>
+										<strong>{{ $tc('cws-development-tools.index.mediaFallback.hostScope') }}:</strong>
+										{{ mediaFallback.hostScope || '-' }}</p>
 								</div>
 							</sw-card>
 						</template>

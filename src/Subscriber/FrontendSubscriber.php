@@ -11,7 +11,6 @@ use Shopware\Core\Content\Media\MediaCollection;
 use Shopware\Core\Content\Media\MediaEvents;
 use Symfony\Component\Filesystem\Filesystem;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
-use Shopware\Core\DevOps\Environment\EnvironmentHelper;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -40,22 +39,6 @@ class FrontendSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $appUrl = EnvironmentHelper::getVariable('APP_URL');
-
-        $allowedHosts = ['ddev.site', 'ngrok-free.app'];
-        $isAllowedHost = false;
-
-        foreach ($allowedHosts as $allowedHost) {
-            if (\is_string($appUrl) && str_contains($appUrl, $allowedHost)) {
-                $isAllowedHost = true;
-                break;
-            }
-        }
-
-        if (!$isAllowedHost) {
-            return;
-        }
-
         $mediaUrlResolverHostFind = $this->resolveCurrentSalesChannelUrl();
         if (!$mediaUrlResolverHostFind) {
             return;
@@ -67,6 +50,13 @@ class FrontendSubscriber implements EventSubscriberInterface
         }
 
         if (!\is_string($mediaUrlResolverHostReplace) || trim($mediaUrlResolverHostReplace) === '') {
+            return;
+        }
+
+        $mediaFallbackEnabled = $this->normalizeBoolean(
+            $this->systemConfigService->get(DevelopmentToolsInfoService::MEDIA_FALLBACK_ENABLED_CONFIG)
+        );
+        if ($mediaFallbackEnabled === false) {
             return;
         }
 
@@ -128,5 +118,18 @@ class FrontendSubscriber implements EventSubscriberInterface
         $physicalPath = \sprintf('%s/media/%s', getcwd(), $path);
 
         return $this->filesystem->exists($physicalPath);
+    }
+
+    private function normalizeBoolean(mixed $value): ?bool
+    {
+        if (\is_bool($value)) {
+            return $value;
+        }
+
+        if (\is_scalar($value)) {
+            return filter_var($value, \FILTER_VALIDATE_BOOLEAN, \FILTER_NULL_ON_FAILURE);
+        }
+
+        return null;
     }
 }

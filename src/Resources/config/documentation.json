@@ -28,7 +28,8 @@
         "Speichere die Einstellung direkt über die Seite CWS Development Tools."
       ],
       "notes": [
-        "Der Fallback läuft nur in APP_ENV=dev und nur auf erlaubten Hosts wie ddev.site und ngrok-free.app.",
+        "Der Fallback kann über einen eigenen Schalter aktiviert oder deaktiviert werden, ohne die Host-URL zu entfernen.",
+        "Der Fallback läuft nur in APP_ENV=dev, aber ohne Host-Whitelist. Jede Development-URL kann genutzt werden.",
         "Vorhandene Werte aus DisMediaUrlResolverLocalDevelopment.config.MediaUrlResolverHostReplace werden weiterhin als Fallback berücksichtigt."
       ]
     },

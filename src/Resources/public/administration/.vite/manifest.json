@@ -4,12 +4,12 @@
     "src": "../../../config/plugin.png"
   },
   "main.js": {
-    "file": "assets/cws-development-tools-DXbwMAad.js",
+    "file": "assets/cws-development-tools-Bx_2OM-V.js",
     "name": "cws-development-tools",
     "src": "main.js",
     "isEntry": true,
     "css": [
-      "assets/cws-development-tools-CmIzixBQ.css"
+      "assets/cws-development-tools-BAXayUR0.css"
     ],
     "assets": [
       "assets/plugin-DD8ZFNPR.png"
