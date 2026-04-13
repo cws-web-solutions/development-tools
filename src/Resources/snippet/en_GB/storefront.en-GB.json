@@ -1,0 +1,19 @@
+{
+  "cwsDevelopmentTools": {
+    "toolbar": {
+      "clearCacheTitle": "Clear cache (ALT + C)",
+      "compileThemesTitle": "Compile themes (ALT + T)",
+      "openSettingsTitle": "Open CWS Development Tools",
+      "openDocumentationTitle": "Open Development Tools Documentation",
+      "openWebsiteTitle": "Open CWS website",
+      "confirmTitle": "Confirm action",
+      "confirmDefaultText": "Do you want to continue?",
+      "confirmCacheClear": "Do you want to clear the cache now?",
+      "confirmThemeCompile": "Do you want to compile the themes now?",
+      "cancel": "Cancel",
+      "accept": "Accept",
+      "requestFailed": "Maintenance request failed.",
+      "requestFailedStatus": "Maintenance request failed (%status%)."
+    }
+  }
+}

@@ -19,6 +19,18 @@ export default class CwsDevelopmentToolsToolbarPlugin extends Plugin {
     this._modalAcceptButton = this.el.querySelector(
       "[data-cws-devtools-modal-accept]",
     );
+    this._translations = {
+      confirmCacheClear:
+        this.el.dataset.cwsDevtoolsConfirmCacheClear || "Run cache:clear?",
+      confirmThemeCompile:
+        this.el.dataset.cwsDevtoolsConfirmThemeCompile || "Run theme:compile?",
+      requestFailed:
+        this.el.dataset.cwsDevtoolsRequestFailed ||
+        "Maintenance request failed.",
+      requestFailedStatus:
+        this.el.dataset.cwsDevtoolsRequestFailedStatus ||
+        "Maintenance request failed (%status%).",
+    };
 
     this._registerEvents();
 
@@ -63,11 +75,6 @@ export default class CwsDevelopmentToolsToolbarPlugin extends Plugin {
 
       const action = button.getAttribute("data-cws-devtools-action");
 
-      if (action === "reload") {
-        window.location.reload();
-        return;
-      }
-
       await this._executeAction(action);
     });
   }
@@ -101,9 +108,9 @@ export default class CwsDevelopmentToolsToolbarPlugin extends Plugin {
       return;
     }
 
-    const actionLabel =
-      action === "cache-clear" ? "cache:clear" : "theme:compile";
-    const shouldRun = await this._openConfirmModal(`Run ${actionLabel}?`);
+    const shouldRun = await this._openConfirmModal(
+      this._getConfirmationMessage(action),
+    );
 
     if (!shouldRun) {
       return;
@@ -123,23 +130,40 @@ export default class CwsDevelopmentToolsToolbarPlugin extends Plugin {
       );
 
       if (!response.ok) {
-        throw new Error(`Maintenance request failed (${response.status}).`);
+        throw new Error(
+          this._translations.requestFailedStatus.replace(
+            "%status%",
+            response.status,
+          ),
+        );
       }
 
       const payload = await response.json();
 
       if (payload.success !== true) {
-        throw new Error(payload.message || "Maintenance request failed.");
+        throw new Error(payload.message || this._translations.requestFailed);
       }
 
       window.location.reload();
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : "Maintenance request failed.";
+        error instanceof Error ? error.message : this._translations.requestFailed;
       window.alert(message);
     } finally {
       this._isProcessing = false;
     }
+  }
+
+  _getConfirmationMessage(action) {
+    if (action === "cache-clear") {
+      return this._translations.confirmCacheClear;
+    }
+
+    if (action === "theme-compile") {
+      return this._translations.confirmThemeCompile;
+    }
+
+    return this._translations.requestFailed;
   }
 
   _isModalOpen() {

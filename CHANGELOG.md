@@ -1,3 +1,9 @@
+### [1.2.1] 2026-04-13
+
+- Switched the storefront toolbar logo to the public bundle asset path.
+- Added storefront snippet translations for toolbar labels, confirmation modal text, and maintenance error messages.
+- Removed hardcoded English toolbar texts so the toolbar follows the active storefront language.
+
 ### [1.2.0] 2026-04-12
 
 - Added a dev-only storefront floating toolbar with quick maintenance actions and shortcuts.
