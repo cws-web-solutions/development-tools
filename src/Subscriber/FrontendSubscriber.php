@@ -19,12 +19,25 @@ use Cws\DevelopmentTools\Service\DevelopmentToolsInfoService;
 
 class FrontendSubscriber implements EventSubscriberInterface
 {
+    private SystemConfigService $systemConfigService;
+
+    private string $environment;
+
+    private Filesystem $filesystem;
+
+    private RequestStack $requestStack;
+
     public function __construct(
-        private readonly SystemConfigService $systemConfigService,
-        private readonly string $environment,
-        private readonly Filesystem $filesystem,
-        private readonly RequestStack $requestStack,
-    ) {}
+        SystemConfigService $systemConfigService,
+        string $environment,
+        Filesystem $filesystem,
+        RequestStack $requestStack
+    ) {
+        $this->systemConfigService = $systemConfigService;
+        $this->environment = $environment;
+        $this->filesystem = $filesystem;
+        $this->requestStack = $requestStack;
+    }
 
     public static function getSubscribedEvents(): array
     {

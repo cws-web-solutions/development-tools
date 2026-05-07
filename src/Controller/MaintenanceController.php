@@ -17,10 +17,16 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route(defaults: [PlatformRequest::ATTRIBUTE_ROUTE_SCOPE => [ApiRouteScope::ID], PlatformRequest::ATTRIBUTE_ACL => ['system.plugin_maintain']])]
 final class MaintenanceController extends AbstractController
 {
+    private DevelopmentMaintenanceService $developmentMaintenanceService;
+
+    private DevelopmentToolsInfoService $developmentToolsInfoService;
+
     public function __construct(
-        private readonly DevelopmentMaintenanceService $developmentMaintenanceService,
-        private readonly DevelopmentToolsInfoService $developmentToolsInfoService,
+        DevelopmentMaintenanceService $developmentMaintenanceService,
+        DevelopmentToolsInfoService $developmentToolsInfoService
     ) {
+        $this->developmentMaintenanceService = $developmentMaintenanceService;
+        $this->developmentToolsInfoService = $developmentToolsInfoService;
     }
 
     #[Route(

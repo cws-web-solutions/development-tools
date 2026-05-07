@@ -10,10 +10,16 @@ final class DevelopmentToolsInfoService
     public const MEDIA_FALLBACK_ENABLED_CONFIG = 'CwsDevelopmentTools.config.MediaUrlResolverEnabled';
     private const LEGACY_MEDIA_FALLBACK_CONFIG = 'DisMediaUrlResolverLocalDevelopment.config.MediaUrlResolverHostReplace';
 
+    private string $environment;
+
+    private SystemConfigService $systemConfigService;
+
     public function __construct(
-        private readonly string $environment,
-        private readonly SystemConfigService $systemConfigService,
+        string $environment,
+        SystemConfigService $systemConfigService
     ) {
+        $this->environment = $environment;
+        $this->systemConfigService = $systemConfigService;
     }
 
     /**

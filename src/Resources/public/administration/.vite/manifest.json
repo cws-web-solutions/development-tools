@@ -1,10 +1,10 @@
 {
   "../../../config/plugin.png": {
-    "file": "assets/plugin-DD8ZFNPR.png",
+    "file": "assets/plugin-BZSo1oAl.png",
     "src": "../../../config/plugin.png"
   },
   "main.js": {
-    "file": "assets/cws-development-tools-Bx_2OM-V.js",
+    "file": "assets/cws-development-tools-9zCrp9i0.js",
     "name": "cws-development-tools",
     "src": "main.js",
     "isEntry": true,
@@ -12,7 +12,7 @@
       "assets/cws-development-tools-BAXayUR0.css"
     ],
     "assets": [
-      "assets/plugin-DD8ZFNPR.png"
+      "assets/plugin-BZSo1oAl.png"
     ]
   }
 }

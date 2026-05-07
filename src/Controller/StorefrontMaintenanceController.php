@@ -17,9 +17,13 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route(defaults: [PlatformRequest::ATTRIBUTE_ROUTE_SCOPE => [StorefrontRouteScope::ID]])]
 class StorefrontMaintenanceController extends AbstractController
 {
+    private DevelopmentMaintenanceService $developmentMaintenanceService;
+
     public function __construct(
-        private readonly DevelopmentMaintenanceService $developmentMaintenanceService,
-    ) {}
+        DevelopmentMaintenanceService $developmentMaintenanceService
+    ) {
+        $this->developmentMaintenanceService = $developmentMaintenanceService;
+    }
 
     #[Route(
         path: '/cws-devtools/maintenance/{action}',

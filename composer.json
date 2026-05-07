@@ -3,7 +3,12 @@
   "description": "Development tools for Shopware local environments",
   "type": "shopware-platform-plugin",
   "license": "MIT",
-  "version": "1.2.2",
+  "version": "1.0.0",
+  "require": {
+    "php": ">=8.2",
+    "shopware/core": "~6.6.0 || ~6.7.0",
+    "shopware/storefront": "~6.6.0 || ~6.7.0"
+  },
   "autoload": {
     "psr-4": {
       "Cws\\DevelopmentTools\\": "src/"
@@ -21,6 +26,10 @@
     "label": {
       "de-DE": "CWS Development Tools",
       "en-GB": "CWS Development Tools"
+    },
+    "description": {
+      "de-DE": "Entwicklungswerkzeuge für lokale Shopware 6 Umgebungen.",
+      "en-GB": "Developer tools for Shopware 6 local environments."
     }
   }
 }

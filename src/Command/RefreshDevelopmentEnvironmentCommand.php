@@ -17,9 +17,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 final class RefreshDevelopmentEnvironmentCommand extends Command
 {
+    private DevelopmentMaintenanceService $developmentMaintenanceService;
+
     public function __construct(
-        private readonly DevelopmentMaintenanceService $developmentMaintenanceService,
+        DevelopmentMaintenanceService $developmentMaintenanceService
     ) {
+        $this->developmentMaintenanceService = $developmentMaintenanceService;
         parent::__construct();
     }
 

@@ -10,12 +10,24 @@ use Shopware\Storefront\Theme\ThemeService;
 
 final class DevelopmentMaintenanceService
 {
+    private string $environment;
+
+    private CacheClearer $cacheClearer;
+
+    private ThemeService $themeService;
+
+    private AbstractAvailableThemeProvider $themeProvider;
+
     public function __construct(
-        private readonly string $environment,
-        private readonly CacheClearer $cacheClearer,
-        private readonly ThemeService $themeService,
-        private readonly AbstractAvailableThemeProvider $themeProvider,
+        string $environment,
+        CacheClearer $cacheClearer,
+        ThemeService $themeService,
+        AbstractAvailableThemeProvider $themeProvider
     ) {
+        $this->environment = $environment;
+        $this->cacheClearer = $cacheClearer;
+        $this->themeService = $themeService;
+        $this->themeProvider = $themeProvider;
     }
 
     /**
