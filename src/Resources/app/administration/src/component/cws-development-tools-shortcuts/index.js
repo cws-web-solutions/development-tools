@@ -36,7 +36,7 @@ Component.register("cws-development-tools-shortcuts", {
 
   computed: {
     canUseShortcuts() {
-      return this.acl.can("system.plugin_maintain") && this.environment === "dev";
+      return this.acl.can("system.plugin_maintain");
     },
 
     isBusy() {

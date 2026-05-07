@@ -23,7 +23,6 @@
       },
       "maintenance": {
         "description": "Run each development maintenance action directly in the administration.",
-        "devOnlyNotice": "Theme compilation and OPcache reset are only available in APP_ENV=dev.",
         "clearCacheTitle": "Clear cache",
         "clearCacheDescription": "Clears Shopware caches and invalidates the related cache pools.",
         "compileThemesTitle": "Compile themes",

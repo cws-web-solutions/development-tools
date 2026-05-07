@@ -24,7 +24,6 @@
       },
       "maintenance": {
         "description": "Führe jede Development-Maintenance direkt in der Administration aus.",
-        "devOnlyNotice": "Themes kompilieren und OPcache leeren sind nur in APP_ENV=dev verfügbar.",
         "clearCacheTitle": "Cache leeren",
         "clearCacheDescription": "Leert die Shopware-Caches und invalidiert die zugehörigen Cache-Pools.",
         "compileThemesTitle": "Themes kompilieren",

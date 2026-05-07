@@ -1,3 +1,10 @@
+### [1.1.0]
+
+- Themes kompilieren und OPcache leeren sind jetzt in allen Umgebungen verfügbar, einschließlich Produktion.
+- Pro-Aktion-Verfügbarkeits-Flags (`themeCompileAvailable`, `opcacheAvailable`) wurden zur Plugin-State-API hinzugefügt.
+- Die dev-only Einschränkung und der Hinweis für Themes kompilieren und OPcache leeren in der Administration wurden entfernt.
+- Shopware-Kompatibilität explizit auf 6.7.10.0 (`~6.7.0`) erweitert.
+
 ### [1.0.0]
 
 - Plugin erstellt.

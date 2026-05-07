@@ -8,14 +8,15 @@
     {
       "key": "maintenance-refresh",
       "title": "Maintenance",
-      "summary": "Leert Shopware-Caches, kompiliert zugewiesene Storefront-Themes und setzt den OPcache direkt aus der Administration zurück.",
+      "summary": "Leert Shopware-Caches sowie kompiliert zugewiesene Storefront-Themes und setzt den OPcache direkt aus der Administration zurück.",
       "actions": [
         "Öffne Einstellungen > Erweiterungen > CWS Development Tools.",
         "Führe Cache leeren, Theme kompilieren oder OPcache leeren gezielt über die einzelnen Aktionen aus.",
         "Für Shell-Workflows steht zusätzlich bin/console cws:development-tools:refresh bereit."
       ],
       "notes": [
-        "Die Funktion steht nur in APP_ENV=dev zur Verfügung.",
+        "Themes kompilieren und OPcache leeren sind in Development- und Production-Umgebungen verfügbar.",
+        "Cache leeren ist als Development-Maintenance-Aktion gedacht.",
         "Die Aktion in der Administration setzt den OPcache der Web-Laufzeit zurück. Der CLI-Befehl betrifft die CLI-Laufzeit."
       ]
     },

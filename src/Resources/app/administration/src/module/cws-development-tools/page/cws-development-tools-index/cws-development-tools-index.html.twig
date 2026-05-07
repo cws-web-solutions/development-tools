@@ -31,9 +31,6 @@
 						<template v-if="active === 'maintenance'">
 							<sw-card :title="$tc('cws-development-tools.index.cards.maintenance')">
 								<p>{{ $tc('cws-development-tools.index.maintenance.description') }}</p>
-								<p v-if="!maintenanceAvailable" class="cws-development-tools-index__maintenance-note">
-									{{ $tc('cws-development-tools.index.maintenance.devOnlyNotice') }}
-								</p>
 
 								<div class="cws-development-tools-index__shop-info-box">
 									<div class="cws-development-tools-index__shop-info-item">
@@ -90,7 +87,7 @@
 												{{ $tc('cws-development-tools.index.maintenance.shortcut') }}
 												<code>{{ formatShortcut('T') }}</code>
 											</small>
-											<sw-button variant="primary" :is-loading="isCompilingThemes" :disabled="isLoading || isBusy || !maintenanceAvailable" @click="onCompileThemes">
+											<sw-button variant="primary" :is-loading="isCompilingThemes" :disabled="isLoading || isBusy || !themeCompileAvailable" @click="onCompileThemes">
 												{{ $tc('cws-development-tools.index.actions.compileThemes') }}
 											</sw-button>
 										</div>
@@ -119,7 +116,7 @@
 												{{ $tc('cws-development-tools.index.maintenance.shortcut') }}
 												<code>{{ formatShortcut('O') }}</code>
 											</small>
-											<sw-button variant="primary" :is-loading="isClearingOpcache" :disabled="isLoading || isBusy || !maintenanceAvailable" @click="onClearOpcache">
+											<sw-button variant="primary" :is-loading="isClearingOpcache" :disabled="isLoading || isBusy || !opcacheAvailable" @click="onClearOpcache">
 												{{ $tc('cws-development-tools.index.actions.clearOpcache') }}
 											</sw-button>
 										</div>
@@ -139,11 +136,7 @@
 
 						<template v-if="active === 'media-fallback'">
 							<sw-card :title="$tc('cws-development-tools.index.cards.mediaFallback')">
-								<sw-switch-field
-									v-model:value="mediaFallbackForm.enabled"
-									:label="$tc('cws-development-tools.index.mediaFallback.enabledLabel')"
-									:help-text="$tc('cws-development-tools.index.mediaFallback.enabledHelpText')"
-								/>
+								<sw-switch-field v-model:value="mediaFallbackForm.enabled" :label="$tc('cws-development-tools.index.mediaFallback.enabledLabel')" :help-text="$tc('cws-development-tools.index.mediaFallback.enabledHelpText')"/>
 
 								<sw-url-field v-model:value="mediaFallbackForm.host" :label="$tc('cws-development-tools.index.mediaFallback.fieldLabel')" :helptext="$tc('cws-development-tools.index.mediaFallback.fieldHelpText')" placeholder="https://example.com"/>
 

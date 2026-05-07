@@ -1,3 +1,10 @@
+### [1.1.0]
+
+- Extended theme compilation and OPcache reset to be available in all environments, including production.
+- Added per-action availability flags (`themeCompileAvailable`, `opcacheAvailable`) to the plugin state API.
+- Removed the dev-only restriction and notice from the compile themes and clear OPcache actions in the administration.
+- Updated Shopware compatibility to explicitly support 6.7.10.0 (`~6.7.0`).
+
 ### [1.0.0]
 
 - Created the plugin.

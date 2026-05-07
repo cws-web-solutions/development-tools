@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Cws\DevelopmentTools\Service;
 
@@ -55,6 +57,8 @@ final class DevelopmentToolsInfoService
             'environment' => $this->environment,
             'maintenance' => [
                 'available' => $this->environment === 'dev',
+                'themeCompileAvailable' => true,
+                'opcacheAvailable' => true,
             ],
             'mediaFallback' => [
                 'enabled' => $mediaFallbackEnabled,

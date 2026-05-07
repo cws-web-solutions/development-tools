@@ -53,6 +53,14 @@ Component.register("cws-development-tools-index", {
       return this.state?.maintenance?.available === true;
     },
 
+    themeCompileAvailable() {
+      return this.state?.maintenance?.themeCompileAvailable === true;
+    },
+
+    opcacheAvailable() {
+      return this.state?.maintenance?.opcacheAvailable === true;
+    },
+
     shopEnvironmentLabel() {
       if (!this.cacheInfo?.environment) {
         return "-";
@@ -174,7 +182,7 @@ Component.register("cws-development-tools-index", {
     },
 
     async onCompileThemes() {
-      if (!this.maintenanceAvailable) {
+      if (!this.themeCompileAvailable) {
         return;
       }
 
@@ -198,7 +206,7 @@ Component.register("cws-development-tools-index", {
     },
 
     async onClearOpcache() {
-      if (!this.maintenanceAvailable) {
+      if (!this.opcacheAvailable) {
         return;
       }
 

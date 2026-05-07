@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Cws\DevelopmentTools\Service;
 
@@ -57,8 +59,6 @@ final class DevelopmentMaintenanceService
      */
     public function compileThemes(bool $activeOnly = false, bool $keepAssets = false): array
     {
-        $this->assertAvailable();
-
         $compiledSalesChannelIds = [];
         $compiledThemeIds = [];
 
@@ -93,8 +93,6 @@ final class DevelopmentMaintenanceService
      */
     public function clearOpcache(): array
     {
-        $this->assertAvailable();
-
         return [
             'environment' => $this->environment,
             'opcache' => $this->resetOpcache(),
