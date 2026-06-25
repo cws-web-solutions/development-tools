@@ -7,7 +7,9 @@
     "index": {
       "tabs": {
         "maintenance": "Maintenance",
-        "mediaFallback": "Media Fallback"
+        "mediaFallback": "Media Fallback",
+        "storefrontToolbar": "Storefront Toolbar",
+        "systemStatus": "System Status"
       },
       "actions": {
         "reload": "Reload",
@@ -15,11 +17,14 @@
         "clearCache": "Clear cache",
         "compileThemes": "Compile themes",
         "clearOpcache": "Clear OPcache",
-        "saveMediaFallback": "Save media fallback"
+        "saveMediaFallback": "Save media fallback",
+        "saveStorefrontToolbar": "Save toolbar setting"
       },
       "cards": {
         "maintenance": "Maintenance",
-        "mediaFallback": "Media Fallback"
+        "mediaFallback": "Media Fallback",
+        "storefrontToolbar": "Storefront Toolbar",
+        "systemStatus": "System Status"
       },
       "maintenance": {
         "description": "Run each development maintenance action directly in the administration.",
@@ -69,6 +74,33 @@
         "sourceSystemConfig": "System config",
         "sourceLegacy": "Legacy system config",
         "sourceMissing": "No value configured"
+      },
+      "storefrontToolbar": {
+        "visibleLabel": "Show toolbar in storefront",
+        "visibleHelpText": "Controls whether the development toolbar is rendered in APP_ENV=dev.",
+        "status": "Status",
+        "visible": "Visible",
+        "hidden": "Hidden",
+        "configKey": "Config key",
+        "scope": "Scope"
+      },
+      "systemStatus": {
+        "pluginVersion": "Plugin version",
+        "environment": "Environment",
+        "debug": "Debug",
+        "phpVersion": "PHP version",
+        "phpSapi": "PHP SAPI",
+        "operatingSystem": "Operating system",
+        "timezone": "Timezone",
+        "memoryLimit": "Memory limit",
+        "maxExecutionTime": "Max execution time",
+        "opcacheLoaded": "OPcache loaded",
+        "opcacheEnabled": "OPcache enabled",
+        "apcuLoaded": "APCu loaded",
+        "xdebugLoaded": "Xdebug loaded",
+        "projectDir": "Project directory",
+        "yes": "Yes",
+        "no": "No"
       }
     },
     "documentation": {
@@ -94,6 +126,7 @@
       "compileThemesSuccess": "Themes compiled successfully.",
       "clearOpcacheSuccess": "OPcache reset successfully.",
       "saveMediaFallbackSuccess": "Media fallback saved successfully.",
+      "saveStorefrontToolbarSuccess": "Storefront toolbar setting saved successfully.",
       "genericError": "The request could not be completed."
     }
   }

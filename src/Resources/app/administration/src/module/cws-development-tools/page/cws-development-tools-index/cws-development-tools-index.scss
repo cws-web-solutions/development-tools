@@ -104,8 +104,34 @@
   margin-top: 8px;
 }
 
+.cws-development-tools-index__status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.cws-development-tools-index__status-item {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #d1d9e0;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.cws-development-tools-index__status-item span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #0f172a;
+}
+
 @media screen and (max-width: 1279px) {
   .cws-development-tools-index__shop-info-box {
+    grid-template-columns: 1fr;
+  }
+
+  .cws-development-tools-index__status-grid {
     grid-template-columns: 1fr;
   }
 

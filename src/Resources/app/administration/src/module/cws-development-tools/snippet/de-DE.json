@@ -7,7 +7,9 @@
     "index": {
       "tabs": {
         "maintenance": "Maintenance",
-        "mediaFallback": "Media Fallback"
+        "mediaFallback": "Media Fallback",
+        "storefrontToolbar": "Storefront-Toolbar",
+        "systemStatus": "Systemstatus"
       },
       "actions": {
         "reload": "Neu laden",
@@ -15,11 +17,14 @@
         "clearCache": "Cache leeren",
         "compileThemes": "Themes kompilieren",
         "clearOpcache": "OPcache leeren",
-        "saveMediaFallback": "Media Fallback speichern"
+        "saveMediaFallback": "Media Fallback speichern",
+        "saveStorefrontToolbar": "Toolbar-Einstellung speichern"
       },
       "cards": {
         "maintenance": "Maintenance",
         "mediaFallback": "Media Fallback",
+        "storefrontToolbar": "Storefront-Toolbar",
+        "systemStatus": "Systemstatus",
         "features": "Verfügbare Funktionen"
       },
       "maintenance": {
@@ -70,6 +75,33 @@
         "sourceSystemConfig": "Systemkonfiguration",
         "sourceLegacy": "Legacy-Systemkonfiguration",
         "sourceMissing": "Kein Wert konfiguriert"
+      },
+      "storefrontToolbar": {
+        "visibleLabel": "Toolbar in der Storefront anzeigen",
+        "visibleHelpText": "Steuert, ob die Development-Toolbar in APP_ENV=dev gerendert wird.",
+        "status": "Status",
+        "visible": "Sichtbar",
+        "hidden": "Ausgeblendet",
+        "configKey": "Config-Key",
+        "scope": "Geltungsbereich"
+      },
+      "systemStatus": {
+        "pluginVersion": "Plugin-Version",
+        "environment": "Umgebung",
+        "debug": "Debug",
+        "phpVersion": "PHP-Version",
+        "phpSapi": "PHP-SAPI",
+        "operatingSystem": "Betriebssystem",
+        "timezone": "Zeitzone",
+        "memoryLimit": "Memory-Limit",
+        "maxExecutionTime": "Max. Ausführungszeit",
+        "opcacheLoaded": "OPcache geladen",
+        "opcacheEnabled": "OPcache aktiv",
+        "apcuLoaded": "APCu geladen",
+        "xdebugLoaded": "Xdebug geladen",
+        "projectDir": "Projektverzeichnis",
+        "yes": "Ja",
+        "no": "Nein"
       }
     },
     "documentation": {
@@ -95,6 +127,7 @@
       "compileThemesSuccess": "Die Themes wurden erfolgreich kompiliert.",
       "clearOpcacheSuccess": "Der OPcache wurde erfolgreich geleert.",
       "saveMediaFallbackSuccess": "Der Media Fallback wurde erfolgreich gespeichert.",
+      "saveStorefrontToolbarSuccess": "Die Storefront-Toolbar-Einstellung wurde erfolgreich gespeichert.",
       "genericError": "Die Anfrage konnte nicht abgeschlossen werden."
     }
   }

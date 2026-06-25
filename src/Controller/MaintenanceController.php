@@ -158,6 +158,24 @@ final class MaintenanceController extends AbstractController
         ]);
     }
 
+    #[Route(
+        path: '/api/_action/cws-development-tools/storefront-toolbar',
+        name: 'api.action.cws_development_tools.storefront_toolbar',
+        methods: [Request::METHOD_POST]
+    )]
+    public function saveStorefrontToolbar(Request $request): JsonResponse
+    {
+        $payload = $this->parsePayload($request);
+
+        return new JsonResponse([
+            'success' => true,
+            'message' => 'Storefront toolbar setting saved.',
+            'data' => $this->developmentToolsInfoService->saveStorefrontToolbar(
+                $this->resolveBoolean($payload, 'visible', true)
+            ),
+        ]);
+    }
+
     /**
      * @return array<string, mixed>
      */

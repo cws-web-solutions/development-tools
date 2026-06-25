@@ -5,17 +5,44 @@
   z-index: 1040;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px;
+  gap: 0;
+  padding: 10px;
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.08);
   backdrop-filter: blur(6px);
   isolation: isolate;
 }
 
+.cws-devtools-toolbar.is-open {
+  gap: 8px;
+}
+
+.cws-devtools-toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(12px);
+  transition:
+    max-width 0.28s ease,
+    opacity 0.2s ease,
+    transform 0.28s ease;
+}
+
+.cws-devtools-toolbar.is-open .cws-devtools-toolbar__actions {
+  max-width: 280px;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.cws-devtools-toolbar__trigger,
 .cws-devtools-toolbar__item {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border: 0;
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.08);
@@ -31,6 +58,14 @@
     transform 0.2s ease;
 }
 
+.cws-devtools-toolbar__trigger {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.16);
+}
+
+.cws-devtools-toolbar__trigger:hover,
+.cws-devtools-toolbar__trigger:focus-visible,
 .cws-devtools-toolbar__item:hover,
 .cws-devtools-toolbar__item:focus-visible {
   color: #0f172a;
@@ -38,13 +73,14 @@
   transform: translateY(-1px);
 }
 
-.cws-devtools-toolbar__item:visited {
+.cws-devtools-toolbar__item:visited,
+.cws-devtools-toolbar__trigger:visited {
   color: rgba(15, 23, 42, 0.52);
 }
 
 .cws-devtools-toolbar__icon {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   display: inline-flex;
 }
 
@@ -64,7 +100,7 @@
   position: absolute;
   right: 0;
   bottom: calc(100% + 10px);
-  width: 100%;
+  width: 320px;
   z-index: 1050;
   display: flex;
   align-items: flex-end;
@@ -108,15 +144,24 @@
     right: 12px;
     bottom: 12px;
     gap: 6px;
-    padding: 6px;
+    padding: 8px;
   }
 
   .cws-devtools-toolbar__modal-backdrop {
     bottom: calc(100% + 8px);
   }
 
+  .cws-devtools-toolbar__trigger,
   .cws-devtools-toolbar__item {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .cws-devtools-toolbar__modal-backdrop {
+    width: calc(100vw - 24px);
+  }
+
+  .cws-devtools-toolbar.is-open .cws-devtools-toolbar__actions {
+    max-width: calc(100vw - 82px);
   }
 }

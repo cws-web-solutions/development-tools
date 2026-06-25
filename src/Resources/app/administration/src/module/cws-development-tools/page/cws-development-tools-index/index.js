@@ -17,6 +17,7 @@ Component.register("cws-development-tools-index", {
       isCompilingThemes: false,
       isClearingOpcache: false,
       isSavingMediaFallback: false,
+      isSavingStorefrontToolbar: false,
       state: null,
       cacheInfo: null,
       maintenanceResults: {
@@ -28,6 +29,9 @@ Component.register("cws-development-tools-index", {
         host: "",
         enabled: false,
       },
+      storefrontToolbarForm: {
+        visible: true,
+      },
     };
   },
 
@@ -37,12 +41,40 @@ Component.register("cws-development-tools-index", {
         this.isClearingCache ||
         this.isCompilingThemes ||
         this.isClearingOpcache ||
-        this.isSavingMediaFallback
+        this.isSavingMediaFallback ||
+        this.isSavingStorefrontToolbar
       );
     },
 
     mediaFallback() {
       return this.state?.mediaFallback ?? {};
+    },
+
+    storefrontToolbar() {
+      return this.state?.storefrontToolbar ?? {};
+    },
+
+    systemStatus() {
+      return this.state?.systemStatus ?? {};
+    },
+
+    systemStatusItems() {
+      return [
+        ["pluginVersion", this.$tc("cws-development-tools.index.systemStatus.pluginVersion")],
+        ["environment", this.$tc("cws-development-tools.index.systemStatus.environment")],
+        ["debug", this.$tc("cws-development-tools.index.systemStatus.debug"), "boolean"],
+        ["phpVersion", this.$tc("cws-development-tools.index.systemStatus.phpVersion")],
+        ["phpSapi", this.$tc("cws-development-tools.index.systemStatus.phpSapi")],
+        ["operatingSystem", this.$tc("cws-development-tools.index.systemStatus.operatingSystem")],
+        ["timezone", this.$tc("cws-development-tools.index.systemStatus.timezone")],
+        ["memoryLimit", this.$tc("cws-development-tools.index.systemStatus.memoryLimit")],
+        ["maxExecutionTime", this.$tc("cws-development-tools.index.systemStatus.maxExecutionTime")],
+        ["opcacheLoaded", this.$tc("cws-development-tools.index.systemStatus.opcacheLoaded"), "boolean"],
+        ["opcacheEnabled", this.$tc("cws-development-tools.index.systemStatus.opcacheEnabled"), "boolean"],
+        ["apcuLoaded", this.$tc("cws-development-tools.index.systemStatus.apcuLoaded"), "boolean"],
+        ["xdebugLoaded", this.$tc("cws-development-tools.index.systemStatus.xdebugLoaded"), "boolean"],
+        ["projectDir", this.$tc("cws-development-tools.index.systemStatus.projectDir")],
+      ];
     },
 
     environment() {
@@ -149,6 +181,8 @@ Component.register("cws-development-tools-index", {
         this.mediaFallbackForm.host = this.state?.mediaFallback?.host ?? "";
         this.mediaFallbackForm.enabled =
           this.state?.mediaFallback?.enabled === true;
+        this.storefrontToolbarForm.visible =
+          this.state?.storefrontToolbar?.visible !== false;
       } catch (error) {
         this.createNotificationError({
           message: this.getErrorMessage(error),
@@ -252,6 +286,40 @@ Component.register("cws-development-tools-index", {
       } finally {
         this.isSavingMediaFallback = false;
       }
+    },
+
+    async onSaveStorefrontToolbar() {
+      this.isSavingStorefrontToolbar = true;
+
+      try {
+        this.state =
+          await this.cwsDevelopmentToolsApiService.saveStorefrontToolbar(
+            this.storefrontToolbarForm.visible,
+          );
+        this.storefrontToolbarForm.visible =
+          this.state?.storefrontToolbar?.visible !== false;
+        this.createNotificationSuccess({
+          message: this.$tc(
+            "cws-development-tools.notifications.saveStorefrontToolbarSuccess",
+          ),
+        });
+      } catch (error) {
+        this.createNotificationError({
+          message: this.getErrorMessage(error),
+        });
+      } finally {
+        this.isSavingStorefrontToolbar = false;
+      }
+    },
+
+    formatStatusValue(value, type = "text") {
+      if (type === "boolean") {
+        return value
+          ? this.$tc("cws-development-tools.index.systemStatus.yes")
+          : this.$tc("cws-development-tools.index.systemStatus.no");
+      }
+
+      return value || "-";
     },
 
     getErrorMessage(error) {

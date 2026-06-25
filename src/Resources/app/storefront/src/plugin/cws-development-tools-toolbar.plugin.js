@@ -5,9 +5,14 @@ export default class CwsDevelopmentToolsToolbarPlugin extends Plugin {
     this._boundKeydown = this._onKeydown.bind(this);
     this._boundModalCancel = () => this._closeConfirmModal(false);
     this._boundModalAccept = () => this._closeConfirmModal(true);
+    this._boundDocumentClick = this._onDocumentClick.bind(this);
 
     this._confirmResolve = null;
     this._isProcessing = false;
+    this._isExpanded = false;
+
+    this._toggleButton = this.el.querySelector("[data-cws-devtools-toggle]");
+    this._actions = this.el.querySelector(".cws-devtools-toolbar__actions");
 
     this._modalBackdrop = this.el.querySelector(
       "[data-cws-devtools-modal-backdrop]",
@@ -32,9 +37,11 @@ export default class CwsDevelopmentToolsToolbarPlugin extends Plugin {
         "Maintenance request failed (%status%).",
     };
 
+    this._setToolbarExpanded(false);
     this._registerEvents();
 
     document.addEventListener("keydown", this._boundKeydown);
+    document.addEventListener("click", this._boundDocumentClick);
 
     if (this._modalCancelButton) {
       this._modalCancelButton.addEventListener("click", this._boundModalCancel);
@@ -47,6 +54,7 @@ export default class CwsDevelopmentToolsToolbarPlugin extends Plugin {
 
   destroy() {
     document.removeEventListener("keydown", this._boundKeydown);
+    document.removeEventListener("click", this._boundDocumentClick);
 
     if (this._modalCancelButton) {
       this._modalCancelButton.removeEventListener(
@@ -67,6 +75,14 @@ export default class CwsDevelopmentToolsToolbarPlugin extends Plugin {
 
   _registerEvents() {
     this.el.addEventListener("click", async (event) => {
+      const toggle = event.target.closest("[data-cws-devtools-toggle]");
+
+      if (toggle) {
+        event.preventDefault();
+        this._toggleToolbar();
+        return;
+      }
+
       const button = event.target.closest("[data-cws-devtools-action]");
 
       if (!button) {
@@ -82,9 +98,21 @@ export default class CwsDevelopmentToolsToolbarPlugin extends Plugin {
   _onKeydown(event) {
     const key = typeof event.key === "string" ? event.key.toLowerCase() : "";
 
+    if (this._isModalOpen() && key === "enter") {
+      event.preventDefault();
+      this._closeConfirmModal(true);
+      return;
+    }
+
     if (key === "escape" && this._isModalOpen()) {
       event.preventDefault();
       this._closeConfirmModal(false);
+      return;
+    }
+
+    if (key === "escape" && this._isExpanded) {
+      event.preventDefault();
+      this._setToolbarExpanded(false);
       return;
     }
 
@@ -101,6 +129,14 @@ export default class CwsDevelopmentToolsToolbarPlugin extends Plugin {
       event.preventDefault();
       this._executeAction("theme-compile");
     }
+  }
+
+  _onDocumentClick(event) {
+    if (!this._isExpanded || this.el.contains(event.target)) {
+      return;
+    }
+
+    this._setToolbarExpanded(false);
   }
 
   async _executeAction(action) {
@@ -180,6 +216,7 @@ export default class CwsDevelopmentToolsToolbarPlugin extends Plugin {
 
     this._modalText.textContent = message;
     this._modalBackdrop.classList.remove("is-hidden");
+    this._modalAcceptButton?.focus();
 
     return new Promise((resolve) => {
       this._confirmResolve = resolve;
@@ -197,5 +234,19 @@ export default class CwsDevelopmentToolsToolbarPlugin extends Plugin {
       this._confirmResolve(accepted);
       this._confirmResolve = null;
     }
+  }
+
+  _toggleToolbar() {
+    this._setToolbarExpanded(!this._isExpanded);
+  }
+
+  _setToolbarExpanded(expanded) {
+    this._isExpanded = expanded;
+    this.el.classList.toggle("is-open", expanded);
+    this._toggleButton?.setAttribute("aria-expanded", expanded ? "true" : "false");
+    this._actions?.setAttribute("aria-hidden", expanded ? "false" : "true");
+    this._actions?.querySelectorAll("button, a").forEach((item) => {
+      item.tabIndex = expanded ? 0 : -1;
+    });
   }
 }

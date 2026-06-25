@@ -25,6 +25,14 @@
 						<sw-tabs-item v-bind="$props" name="media-fallback" :active-tab="active">
 							{{ $tc('cws-development-tools.index.tabs.mediaFallback') }}
 						</sw-tabs-item>
+
+						<sw-tabs-item v-bind="$props" name="storefront-toolbar" :active-tab="active">
+							{{ $tc('cws-development-tools.index.tabs.storefrontToolbar') }}
+						</sw-tabs-item>
+
+						<sw-tabs-item v-bind="$props" name="system-status" :active-tab="active">
+							{{ $tc('cws-development-tools.index.tabs.systemStatus') }}
+						</sw-tabs-item>
 					</template>
 
 					<template #content="{ active }">
@@ -173,6 +181,42 @@
 									<p>
 										<strong>{{ $tc('cws-development-tools.index.mediaFallback.hostScope') }}:</strong>
 										{{ mediaFallback.hostScope || '-' }}</p>
+								</div>
+							</sw-card>
+						</template>
+
+						<template v-if="active === 'storefront-toolbar'">
+							<sw-card :title="$tc('cws-development-tools.index.cards.storefrontToolbar')">
+								<sw-switch-field v-model:value="storefrontToolbarForm.visible" :label="$tc('cws-development-tools.index.storefrontToolbar.visibleLabel')" :help-text="$tc('cws-development-tools.index.storefrontToolbar.visibleHelpText')"/>
+
+								<div class="cws-development-tools-index__button-row">
+									<sw-button variant="primary" :is-loading="isSavingStorefrontToolbar" :disabled="isLoading || isBusy" @click="onSaveStorefrontToolbar">
+										{{ $tc('cws-development-tools.index.actions.saveStorefrontToolbar') }}
+									</sw-button>
+								</div>
+
+								<div class="cws-development-tools-index__status-box">
+									<p>
+										<strong>{{ $tc('cws-development-tools.index.storefrontToolbar.status') }}:</strong>
+										{{ storefrontToolbar.visible ? $tc('cws-development-tools.index.storefrontToolbar.visible') : $tc('cws-development-tools.index.storefrontToolbar.hidden') }}</p>
+									<p>
+										<strong>{{ $tc('cws-development-tools.index.storefrontToolbar.configKey') }}:</strong>
+										<code>{{ storefrontToolbar.configKey }}</code>
+									</p>
+									<p>
+										<strong>{{ $tc('cws-development-tools.index.storefrontToolbar.scope') }}:</strong>
+										{{ storefrontToolbar.scope || '-' }}</p>
+								</div>
+							</sw-card>
+						</template>
+
+						<template v-if="active === 'system-status'">
+							<sw-card :title="$tc('cws-development-tools.index.cards.systemStatus')">
+								<div class="cws-development-tools-index__status-grid">
+									<div v-for="item in systemStatusItems" :key="item[0]" class="cws-development-tools-index__status-item">
+										<strong>{{ item[1] }}</strong>
+										<span>{{ formatStatusValue(systemStatus[item[0]], item[2]) }}</span>
+									</div>
 								</div>
 							</sw-card>
 						</template>

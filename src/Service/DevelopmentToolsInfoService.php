@@ -10,17 +10,22 @@ final class DevelopmentToolsInfoService
 {
     public const MEDIA_FALLBACK_CONFIG = 'CwsDevelopmentTools.config.MediaUrlResolverHostReplace';
     public const MEDIA_FALLBACK_ENABLED_CONFIG = 'CwsDevelopmentTools.config.MediaUrlResolverEnabled';
+    public const STOREFRONT_TOOLBAR_VISIBLE_CONFIG = 'CwsDevelopmentTools.config.StorefrontToolbarVisible';
     private const LEGACY_MEDIA_FALLBACK_CONFIG = 'DisMediaUrlResolverLocalDevelopment.config.MediaUrlResolverHostReplace';
 
     private string $environment;
+
+    private string $projectDir;
 
     private SystemConfigService $systemConfigService;
 
     public function __construct(
         string $environment,
+        string $projectDir,
         SystemConfigService $systemConfigService
     ) {
         $this->environment = $environment;
+        $this->projectDir = $projectDir;
         $this->systemConfigService = $systemConfigService;
     }
 
@@ -39,6 +44,8 @@ final class DevelopmentToolsInfoService
      *         legacyConfigKey: string,
      *         hostScope: string
      *     },
+     *     storefrontToolbar: array{visible: bool, configKey: string, scope: string},
+     *     systemStatus: array<string, mixed>,
      *     documentation: array<string, mixed>
      * }
      */
@@ -71,6 +78,12 @@ final class DevelopmentToolsInfoService
                 'legacyConfigKey' => self::LEGACY_MEDIA_FALLBACK_CONFIG,
                 'hostScope' => 'APP_ENV=dev',
             ],
+            'storefrontToolbar' => [
+                'visible' => $this->resolveStorefrontToolbarVisible(),
+                'configKey' => self::STOREFRONT_TOOLBAR_VISIBLE_CONFIG,
+                'scope' => 'APP_ENV=dev',
+            ],
+            'systemStatus' => $this->getSystemStatus(),
             'documentation' => $this->loadDocumentation(),
         ];
     }
@@ -87,6 +100,62 @@ final class DevelopmentToolsInfoService
         $this->systemConfigService->set(self::MEDIA_FALLBACK_ENABLED_CONFIG, $enabled);
 
         return $this->getState();
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function saveStorefrontToolbar(bool $visible): array
+    {
+        $this->systemConfigService->set(self::STOREFRONT_TOOLBAR_VISIBLE_CONFIG, $visible);
+
+        return $this->getState();
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function getSystemStatus(): array
+    {
+        $opcacheEnabled = \function_exists('opcache_get_status') && \is_array(@opcache_get_status(false));
+
+        return [
+            'pluginVersion' => $this->getPluginVersion(),
+            'environment' => $this->environment,
+            'debug' => filter_var($_SERVER['APP_DEBUG'] ?? false, \FILTER_VALIDATE_BOOLEAN),
+            'phpVersion' => \PHP_VERSION,
+            'phpSapi' => \PHP_SAPI,
+            'operatingSystem' => \PHP_OS_FAMILY,
+            'timezone' => date_default_timezone_get(),
+            'memoryLimit' => (string) ini_get('memory_limit'),
+            'maxExecutionTime' => (string) ini_get('max_execution_time'),
+            'opcacheLoaded' => \extension_loaded('Zend OPcache'),
+            'opcacheEnabled' => $opcacheEnabled,
+            'apcuLoaded' => \extension_loaded('apcu'),
+            'xdebugLoaded' => \extension_loaded('xdebug'),
+            'projectDir' => $this->projectDir,
+        ];
+    }
+
+    private function getPluginVersion(): string
+    {
+        $composerPath = dirname(__DIR__) . '/../composer.json';
+        if (!is_file($composerPath) || !is_readable($composerPath)) {
+            return '-';
+        }
+
+        $contents = file_get_contents($composerPath);
+        if ($contents === false) {
+            return '-';
+        }
+
+        try {
+            $decoded = json_decode($contents, true, 512, \JSON_THROW_ON_ERROR);
+        } catch (\JsonException) {
+            return '-';
+        }
+
+        return \is_string($decoded['version'] ?? null) ? $decoded['version'] : '-';
     }
 
     /**
@@ -144,6 +213,11 @@ final class DevelopmentToolsInfoService
         }
 
         return $mediaFallbackConfigured;
+    }
+
+    private function resolveStorefrontToolbarVisible(): bool
+    {
+        return $this->normalizeBoolean($this->systemConfigService->get(self::STOREFRONT_TOOLBAR_VISIBLE_CONFIG)) ?? true;
     }
 
     private function normalizeBoolean(mixed $value): ?bool

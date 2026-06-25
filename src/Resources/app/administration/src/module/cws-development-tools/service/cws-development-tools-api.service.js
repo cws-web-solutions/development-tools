@@ -44,6 +44,18 @@ export default class CwsDevelopmentToolsApiService {
       .then((response) => response.data.data);
   }
 
+  saveStorefrontToolbar(visible) {
+    return this.httpClient
+      .post(
+        "/_action/cws-development-tools/storefront-toolbar",
+        { visible },
+        {
+          headers: this.getAuthHeaders(),
+        },
+      )
+      .then((response) => response.data.data);
+  }
+
   getAuthHeaders() {
     return {
       Accept: "application/json",

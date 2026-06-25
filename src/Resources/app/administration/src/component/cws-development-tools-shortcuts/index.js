@@ -63,11 +63,26 @@ Component.register("cws-development-tools-shortcuts", {
     },
 
     keydownEventListener(event) {
+      const key = typeof event.key === "string" ? event.key.toLowerCase() : "";
+
+      if (this.isConfirmModalOpen) {
+        if (key === "enter") {
+          event.preventDefault();
+          this.confirmShortcutAction();
+          return;
+        }
+
+        if (key === "escape") {
+          event.preventDefault();
+          this.closeShortcutConfirmation();
+          return;
+        }
+      }
+
       if (this.$device.getSystemKey() !== "ALT" || !this.canUseShortcuts) {
         return;
       }
 
-      const key = typeof event.key === "string" ? event.key.toLowerCase() : "";
       if (
         event.key === "Alt" ||
         ((key === "t" || key === "o") && event.altKey)

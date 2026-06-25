@@ -1,3 +1,10 @@
+### [1.1.1]
+
+- Enter/Escape-Tastatursteuerung für Bestätigungsdialoge hinzugefügt.
+- Eine Einstellung zur Sichtbarkeit der Storefront-Toolbar inklusive Administration-Steuerung hinzugefügt.
+- Die Storefront-Toolbar zeigt nun einen größeren Einzel-Icon-Trigger mit animiertem Aufklappen.
+- Ein Systemstatus-Tab mit Runtime- und Erweiterungsdiagnosen wurde in der Administration hinzugefügt.
+
 ### [1.1.0]
 
 - Themes kompilieren und OPcache leeren sind jetzt in allen Umgebungen verfügbar, einschließlich Produktion.

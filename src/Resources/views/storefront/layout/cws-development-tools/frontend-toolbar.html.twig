@@ -8,51 +8,46 @@
 {% set cwsToolbarRequestFailed = 'cwsDevelopmentTools.toolbar.requestFailed'|trans|striptags %}
 {% set cwsToolbarRequestFailedStatus = 'cwsDevelopmentTools.toolbar.requestFailedStatus'|trans|striptags %}
 
-<div
-	class="cws-devtools-toolbar"
-	data-cws-devtools-toolbar
-	data-cws-devtools-confirm-cache-clear="{{ cwsToolbarConfirmCacheClear }}"
-	data-cws-devtools-confirm-theme-compile="{{ cwsToolbarConfirmThemeCompile }}"
-	data-cws-devtools-request-failed="{{ cwsToolbarRequestFailed }}"
-	data-cws-devtools-request-failed-status="{{ cwsToolbarRequestFailedStatus }}"
->
-	<button class="cws-devtools-toolbar__item" type="button" data-cws-devtools-action="cache-clear" title="{{ cwsToolbarClearCacheTitle }}" aria-label="{{ cwsToolbarClearCacheTitle }}">
+<div class="cws-devtools-toolbar" data-cws-devtools-toolbar data-cws-devtools-confirm-cache-clear="{{ cwsToolbarConfirmCacheClear }}" data-cws-devtools-confirm-theme-compile="{{ cwsToolbarConfirmThemeCompile }}" data-cws-devtools-request-failed="{{ cwsToolbarRequestFailed }}" data-cws-devtools-request-failed-status="{{ cwsToolbarRequestFailedStatus }}">
+	<button class="cws-devtools-toolbar__trigger" type="button" data-cws-devtools-toggle aria-expanded="false" title="{{ cwsToolbarOpenSettingsTitle }}" aria-label="{{ cwsToolbarOpenSettingsTitle }}">
 		<span class="cws-devtools-toolbar__icon" aria-hidden="true">
-			<svg viewbox="0 0 24 24" focusable="false">
-				<path d="M7 4.5h10v2H7v-2Zm-2 4h14v10.5A2.5 2.5 0 0 1 16.5 21h-9A2.5 2.5 0 0 1 5 19V8.5Zm4 2V18h1.5v-7.5H9Zm4.5 0V18H15v-7.5h-1.5Z"></path>
-			</svg>
+			<img src="{{ asset('bundles/cwsdevelopmenttools/icon/cws.png') }}" alt="CWS">
 		</span>
 	</button>
 
-	<button class="cws-devtools-toolbar__item" type="button" data-cws-devtools-action="theme-compile" title="{{ cwsToolbarCompileThemesTitle }}" aria-label="{{ cwsToolbarCompileThemesTitle }}">
-		<span class="cws-devtools-toolbar__icon" aria-hidden="true">
-			<svg viewbox="0 0 24 24" focusable="false">
-				<path d="m3 7 9-4 9 4-9 4-9-4Zm2 3.3 7 3.1v7.1l-7-3.1v-7.1Zm9 10.2v-7.1l7-3.1v7.1l-7 3.1Z"></path>
-			</svg>
-		</span>
-	</button>
+	<div class="cws-devtools-toolbar__actions">
+		<button class="cws-devtools-toolbar__item" type="button" data-cws-devtools-action="cache-clear" title="{{ cwsToolbarClearCacheTitle }}" aria-label="{{ cwsToolbarClearCacheTitle }}">
+			<span class="cws-devtools-toolbar__icon" aria-hidden="true">
+				<svg viewbox="0 0 24 24" focusable="false">
+					<path d="M7 4.5h10v2H7v-2Zm-2 4h14v10.5A2.5 2.5 0 0 1 16.5 21h-9A2.5 2.5 0 0 1 5 19V8.5Zm4 2V18h1.5v-7.5H9Zm4.5 0V18H15v-7.5h-1.5Z"></path>
+				</svg>
+			</span>
+		</button>
 
-	<a class="cws-devtools-toolbar__item" href="/admin#/cws/development-tools/index" target="_blank" rel="noopener noreferrer" title="{{ cwsToolbarOpenSettingsTitle }}" aria-label="{{ cwsToolbarOpenSettingsTitle }}">
-		<span class="cws-devtools-toolbar__icon" aria-hidden="true">
-			<svg viewbox="0 0 24 24" focusable="false">
-				<path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Zm9.1 2.8-1.9-.3a7.7 7.7 0 0 0-.8-1.8l1.1-1.6a.9.9 0 0 0-.1-1.2l-1.7-1.7a.9.9 0 0 0-1.2-.1l-1.6 1.1a7.7 7.7 0 0 0-1.8-.8l-.3-1.9a.9.9 0 0 0-.9-.7h-2.4a.9.9 0 0 0-.9.7l-.3 1.9a7.7 7.7 0 0 0-1.8.8L6.3 4.5a.9.9 0 0 0-1.2.1L3.4 6.3a.9.9 0 0 0-.1 1.2l1.1 1.6a7.7 7.7 0 0 0-.8 1.8l-1.9.3a.9.9 0 0 0-.7.9v2.4c0 .4.3.8.7.9l1.9.3c.2.6.5 1.2.8 1.8l-1.1 1.6a.9.9 0 0 0 .1 1.2l1.7 1.7c.3.3.8.3 1.2.1l1.6-1.1c.6.3 1.2.6 1.8.8l.3 1.9c.1.4.5.7.9.7h2.4c.4 0 .8-.3.9-.7l.3-1.9c.6-.2 1.2-.5 1.8-.8l1.6 1.1c.4.2.9.2 1.2-.1l1.7-1.7a.9.9 0 0 0 .1-1.2l-1.1-1.6c.3-.6.6-1.2.8-1.8l1.9-.3c.4-.1.7-.5.7-.9v-2.4a.9.9 0 0 0-.7-.9Z"></path>
-			</svg>
-		</span>
-	</a>
+		<button class="cws-devtools-toolbar__item" type="button" data-cws-devtools-action="theme-compile" title="{{ cwsToolbarCompileThemesTitle }}" aria-label="{{ cwsToolbarCompileThemesTitle }}">
+			<span class="cws-devtools-toolbar__icon" aria-hidden="true">
+				<svg viewbox="0 0 24 24" focusable="false">
+					<path d="m3 7 9-4 9 4-9 4-9-4Zm2 3.3 7 3.1v7.1l-7-3.1v-7.1Zm9 10.2v-7.1l7-3.1v7.1l-7 3.1Z"></path>
+				</svg>
+			</span>
+		</button>
 
-	<a class="cws-devtools-toolbar__item" href="/admin#/cws/development-tools/documentation" target="_blank" rel="noopener noreferrer" title="{{ cwsToolbarOpenDocumentationTitle }}" aria-label="{{ cwsToolbarOpenDocumentationTitle }}">
-		<span class="cws-devtools-toolbar__icon" aria-hidden="true">
-			<svg viewbox="0 0 24 24" focusable="false">
-				<path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm8 1.5V9h4.5L14 4.5ZM8 12h8v1.5H8V12Zm0 3h8v1.5H8V15Zm0-6h4v1.5H8V9Z"></path>
-			</svg>
-		</span>
-	</a>
+		<a class="cws-devtools-toolbar__item" href="/admin#/cws/development-tools/index" target="_blank" rel="noopener noreferrer" title="{{ cwsToolbarOpenSettingsTitle }}" aria-label="{{ cwsToolbarOpenSettingsTitle }}">
+			<span class="cws-devtools-toolbar__icon" aria-hidden="true">
+				<svg viewbox="0 0 24 24" focusable="false">
+					<path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Zm9.1 2.8-1.9-.3a7.7 7.7 0 0 0-.8-1.8l1.1-1.6a.9.9 0 0 0-.1-1.2l-1.7-1.7a.9.9 0 0 0-1.2-.1l-1.6 1.1a7.7 7.7 0 0 0-1.8-.8l-.3-1.9a.9.9 0 0 0-.9-.7h-2.4a.9.9 0 0 0-.9.7l-.3 1.9a7.7 7.7 0 0 0-1.8.8L6.3 4.5a.9.9 0 0 0-1.2.1L3.4 6.3a.9.9 0 0 0-.1 1.2l1.1 1.6a7.7 7.7 0 0 0-.8 1.8l-1.9.3a.9.9 0 0 0-.7.9v2.4c0 .4.3.8.7.9l1.9.3c.2.6.5 1.2.8 1.8l-1.1 1.6a.9.9 0 0 0 .1 1.2l1.7 1.7c.3.3.8.3 1.2.1l1.6-1.1c.6.3 1.2.6 1.8.8l.3 1.9c.1.4.5.7.9.7h2.4c.4 0 .8-.3.9-.7l.3-1.9c.6-.2 1.2-.5 1.8-.8l1.6 1.1c.4.2.9.2 1.2-.1l1.7-1.7a.9.9 0 0 0 .1-1.2l-1.1-1.6c.3-.6.6-1.2.8-1.8l1.9-.3c.4-.1.7-.5.7-.9v-2.4a.9.9 0 0 0-.7-.9Z"></path>
+				</svg>
+			</span>
+		</a>
 
-	<a class="cws-devtools-toolbar__item" href="https://cws-web.de" target="_blank" rel="noopener noreferrer" title="{{ cwsToolbarOpenWebsiteTitle }}" aria-label="{{ cwsToolbarOpenWebsiteTitle }}">
-		<span class="cws-devtools-toolbar__icon" aria-hidden="true">
-			<img src="{{ asset('bundles/cwsdevelopmenttools/icon/cws.svg') }}" alt="CWS">
-		</span>
-	</a>
+		<a class="cws-devtools-toolbar__item" href="/admin#/cws/development-tools/documentation" target="_blank" rel="noopener noreferrer" title="{{ cwsToolbarOpenDocumentationTitle }}" aria-label="{{ cwsToolbarOpenDocumentationTitle }}">
+			<span class="cws-devtools-toolbar__icon" aria-hidden="true">
+				<svg viewbox="0 0 24 24" focusable="false">
+					<path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm8 1.5V9h4.5L14 4.5ZM8 12h8v1.5H8V12Zm0 3h8v1.5H8V15Zm0-6h4v1.5H8V9Z"></path>
+				</svg>
+			</span>
+		</a>
+	</div>
 
 	<div class="cws-devtools-toolbar__modal-backdrop is-hidden" data-cws-devtools-modal-backdrop>
 		<div class="cws-devtools-toolbar__modal" role="dialog" aria-modal="true" aria-labelledby="cws-devtools-modal-title">

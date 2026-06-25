@@ -3,7 +3,7 @@
 {% block base_body_inner %}
     {{ parent() }}
 
-    {% if app.environment == 'dev' %}
+    {% if app.environment == 'dev' and config('CwsDevelopmentTools.config.StorefrontToolbarVisible') is not same as(false) %}
         {% sw_include '@CwsDevelopmentTools/storefront/layout/cws-development-tools/frontend-toolbar.html.twig' %}
     {% endif %}
 {% endblock %}

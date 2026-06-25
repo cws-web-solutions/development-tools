@@ -1,3 +1,10 @@
+### [1.1.1]
+
+- Added Enter/Escape keyboard handling to confirmation modals.
+- Added a storefront toolbar visibility setting and administration control.
+- Changed the storefront toolbar to a larger single-icon trigger with animated expansion.
+- Added a System Status administration tab with runtime and extension diagnostics.
+
 ### [1.1.0]
 
 - Extended theme compilation and OPcache reset to be available in all environments, including production.
