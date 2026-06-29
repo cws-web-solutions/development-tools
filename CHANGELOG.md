@@ -1,3 +1,8 @@
+### [1.1.2]
+
+- Fixed the administration shortcut wrapper so it no longer affects the Shopware 6.6 backend layout height.
+- Replaced the embedded-image SVG toolbar icon with a sanitized static vector SVG accepted by Shopware plugin analysis.
+
 ### [1.1.1]
 
 - Added Enter/Escape keyboard handling to confirmation modals.

@@ -1,3 +1,8 @@
+### [1.1.2]
+
+- Der Administration-Shortcut-Wrapper beeinflusst die Backend-Layout-Höhe in Shopware 6.6 nicht mehr.
+- Das SVG-Toolbar-Icon mit eingebettetem Bild wurde durch ein bereinigtes statisches Vektor-SVG ersetzt, das von der Shopware-Plugin-Analyse akzeptiert wird.
+
 ### [1.1.1]
 
 - Enter/Escape-Tastatursteuerung für Bestätigungsdialoge hinzugefügt.

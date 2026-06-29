@@ -3,11 +3,11 @@
   "entryPoints": {
     "cws-development-tools": {
       "css": [
-        "/bundles/cwsdevelopmenttools/administration/assets/cws-development-tools-CVEHgobz.css"
+        "/bundles/cwsdevelopmenttools/administration/assets/cws-development-tools-D8i38E9p.css"
       ],
       "dynamic": [],
       "js": [
-        "/bundles/cwsdevelopmenttools/administration/assets/cws-development-tools-J5vWBs0v.js"
+        "/bundles/cwsdevelopmenttools/administration/assets/cws-development-tools-Bm2Oz517.js"
       ],
       "legacy": false,
       "preload": []

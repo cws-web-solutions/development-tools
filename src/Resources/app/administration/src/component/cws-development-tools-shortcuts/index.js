@@ -1,4 +1,5 @@
 import template from "./cws-development-tools-shortcuts.html.twig";
+import "./cws-development-tools-shortcuts.scss";
 
 const { Component, Mixin } = Shopware;
 
