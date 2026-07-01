@@ -85,6 +85,34 @@
         "scope": "Scope"
       },
       "systemStatus": {
+        "healthTitle": "System health",
+        "healthDescription": "Live checks for runtime configuration and background processing.",
+        "runtimeTitle": "Runtime information",
+        "status": "Status",
+        "check": "Check",
+        "current": "Current",
+        "recommended": "Recommended",
+        "states": {
+          "ok": "Good",
+          "warning": "Warning",
+          "error": "Error",
+          "info": "Info"
+        },
+        "checks": {
+          "environment": "Application environment",
+          "debug-mode": "Debug mode",
+          "php-version": "PHP version",
+          "memory-limit": "PHP memory limit",
+          "opcache": "PHP OPcache",
+          "pcre-jit": "PCRE JIT",
+          "php-extension-intl": "PHP Intl extension",
+          "php-extension-sodium": "PHP Sodium extension",
+          "php-extension-curl": "PHP cURL extension",
+          "mysql-version": "Database version",
+          "mysql-timezone": "Database timezone",
+          "message-queue": "Message queue",
+          "scheduled-tasks": "Scheduled tasks"
+        },
         "pluginVersion": "Plugin version",
         "environment": "Environment",
         "debug": "Debug",

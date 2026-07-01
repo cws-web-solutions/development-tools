@@ -86,6 +86,34 @@
         "scope": "Geltungsbereich"
       },
       "systemStatus": {
+        "healthTitle": "Systemzustand",
+        "healthDescription": "Live-Prüfungen für Laufzeitkonfiguration und Hintergrundverarbeitung.",
+        "runtimeTitle": "Laufzeitinformationen",
+        "status": "Status",
+        "check": "Prüfung",
+        "current": "Aktuell",
+        "recommended": "Empfohlen",
+        "states": {
+          "ok": "Gut",
+          "warning": "Warnung",
+          "error": "Fehler",
+          "info": "Info"
+        },
+        "checks": {
+          "environment": "Anwendungsumgebung",
+          "debug-mode": "Debug-Modus",
+          "php-version": "PHP-Version",
+          "memory-limit": "PHP Memory-Limit",
+          "opcache": "PHP OPcache",
+          "pcre-jit": "PCRE JIT",
+          "php-extension-intl": "PHP Intl-Erweiterung",
+          "php-extension-sodium": "PHP Sodium-Erweiterung",
+          "php-extension-curl": "PHP cURL-Erweiterung",
+          "mysql-version": "Datenbankversion",
+          "mysql-timezone": "Datenbankzeitzone",
+          "message-queue": "Nachrichtenwarteschlange",
+          "scheduled-tasks": "Geplante Aufgaben"
+        },
         "pluginVersion": "Plugin-Version",
         "environment": "Umgebung",
         "debug": "Debug",

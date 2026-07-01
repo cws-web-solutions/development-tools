@@ -1,3 +1,13 @@
+### [1.2.0]
+
+- Expanded System Status into a live health dashboard with severity summaries and recommended values.
+- Added independent checks for environment, debug mode, PHP, memory, OPcache, PCRE JIT, required PHP extensions, database, message queue, and scheduled tasks.
+- Added responsive, severity-sorted health results with English and German administration labels.
+- Kept every health check isolated so unavailable diagnostics do not prevent the remaining system status from loading.
+- Fixed media fallback rewriting for relative Shopware media and thumbnail URLs.
+- Changed local media detection to use the project public directory instead of the process working directory.
+- Preserved query strings and fragments when generating fallback media URLs.
+
 ### [1.1.2]
 
 - Fixed the administration shortcut wrapper so it no longer affects the Shopware 6.6 backend layout height.

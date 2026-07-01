@@ -126,6 +126,106 @@
   color: #0f172a;
 }
 
+.cws-development-tools-index__health-description {
+  margin: 0 0 16px;
+  color: #52667a;
+}
+
+.cws-development-tools-index__health-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.cws-development-tools-index__health-summary-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px;
+  border-left: 4px solid #758ca3;
+  background: #f8fafc;
+}
+
+.cws-development-tools-index__health-summary-item strong {
+  font-size: 20px;
+}
+
+.cws-development-tools-index__health-summary-item.is-error {
+  border-color: #de294c;
+}
+
+.cws-development-tools-index__health-summary-item.is-warning {
+  border-color: #e9a72c;
+}
+
+.cws-development-tools-index__health-summary-item.is-info {
+  border-color: #189eff;
+}
+
+.cws-development-tools-index__health-summary-item.is-ok {
+  border-color: #37d046;
+}
+
+.cws-development-tools-index__health-table-wrap {
+  overflow-x: auto;
+}
+
+.cws-development-tools-index__health-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.cws-development-tools-index__health-table th,
+.cws-development-tools-index__health-table td {
+  padding: 12px;
+  border-bottom: 1px solid #d1d9e0;
+  vertical-align: middle;
+}
+
+.cws-development-tools-index__health-table th {
+  color: #52667a;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.cws-development-tools-index__health-table code {
+  white-space: nowrap;
+}
+
+.cws-development-tools-index__health-badge {
+  display: inline-block;
+  min-width: 72px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #dfe6ec;
+  color: #33445a;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.cws-development-tools-index__health-badge.is-error {
+  background: #fbe6ea;
+  color: #b71938;
+}
+
+.cws-development-tools-index__health-badge.is-warning {
+  background: #fff2d8;
+  color: #8f5b00;
+}
+
+.cws-development-tools-index__health-badge.is-info {
+  background: #e3f3ff;
+  color: #0870b7;
+}
+
+.cws-development-tools-index__health-badge.is-ok {
+  background: #e1f6e3;
+  color: #187b21;
+}
+
 @media screen and (max-width: 1279px) {
   .cws-development-tools-index__shop-info-box {
     grid-template-columns: 1fr;
@@ -133,6 +233,10 @@
 
   .cws-development-tools-index__status-grid {
     grid-template-columns: 1fr;
+  }
+
+  .cws-development-tools-index__health-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .cws-development-tools-index__action-box {

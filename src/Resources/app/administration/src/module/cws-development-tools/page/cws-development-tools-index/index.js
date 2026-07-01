@@ -58,6 +58,25 @@ Component.register("cws-development-tools-index", {
       return this.state?.systemStatus ?? {};
     },
 
+    healthChecks() {
+      return this.state?.healthChecks ?? [];
+    },
+
+    healthSummary() {
+      return this.healthChecks.reduce(
+        (summary, check) => {
+          if (
+            Object.prototype.hasOwnProperty.call(summary, check.status)
+          ) {
+            summary[check.status] += 1;
+          }
+
+          return summary;
+        },
+        { ok: 0, warning: 0, error: 0, info: 0 },
+      );
+    },
+
     systemStatusItems() {
       return [
         ["pluginVersion", this.$tc("cws-development-tools.index.systemStatus.pluginVersion")],
@@ -163,6 +182,19 @@ Component.register("cws-development-tools-index", {
   },
 
   methods: {
+    healthCheckName(check) {
+      const key = `cws-development-tools.index.systemStatus.checks.${check.id}`;
+      const translated = this.$tc(key);
+
+      return translated === key ? check.name : translated;
+    },
+
+    healthStatusLabel(status) {
+      return this.$tc(
+        `cws-development-tools.index.systemStatus.states.${status}`,
+      );
+    },
+
     goToDocumentation() {
       this.$router.push({ name: "cws.development.tools.documentation" });
     },

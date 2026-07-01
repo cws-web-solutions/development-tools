@@ -211,7 +211,57 @@
 						</template>
 
 						<template v-if="active === 'system-status'">
-							<sw-card :title="$tc('cws-development-tools.index.cards.systemStatus')">
+							<sw-card :title="$tc('cws-development-tools.index.systemStatus.healthTitle')">
+								<p class="cws-development-tools-index__health-description">
+									{{ $tc('cws-development-tools.index.systemStatus.healthDescription') }}
+								</p>
+
+								<div class="cws-development-tools-index__health-summary">
+									<div class="cws-development-tools-index__health-summary-item is-error">
+										<strong>{{ healthSummary.error }}</strong>
+										<span>{{ $tc('cws-development-tools.index.systemStatus.states.error') }}</span>
+									</div>
+									<div class="cws-development-tools-index__health-summary-item is-warning">
+										<strong>{{ healthSummary.warning }}</strong>
+										<span>{{ $tc('cws-development-tools.index.systemStatus.states.warning') }}</span>
+									</div>
+									<div class="cws-development-tools-index__health-summary-item is-info">
+										<strong>{{ healthSummary.info }}</strong>
+										<span>{{ $tc('cws-development-tools.index.systemStatus.states.info') }}</span>
+									</div>
+									<div class="cws-development-tools-index__health-summary-item is-ok">
+										<strong>{{ healthSummary.ok }}</strong>
+										<span>{{ $tc('cws-development-tools.index.systemStatus.states.ok') }}</span>
+									</div>
+								</div>
+
+								<div class="cws-development-tools-index__health-table-wrap">
+									<table class="cws-development-tools-index__health-table">
+										<thead>
+											<tr>
+												<th>{{ $tc('cws-development-tools.index.systemStatus.status') }}</th>
+												<th>{{ $tc('cws-development-tools.index.systemStatus.check') }}</th>
+												<th>{{ $tc('cws-development-tools.index.systemStatus.current') }}</th>
+												<th>{{ $tc('cws-development-tools.index.systemStatus.recommended') }}</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr v-for="check in healthChecks" :key="check.id">
+												<td>
+													<span class="cws-development-tools-index__health-badge" :class="'is-' + check.status">
+														{{ healthStatusLabel(check.status) }}
+													</span>
+												</td>
+												<td><strong>{{ healthCheckName(check) }}</strong></td>
+												<td><code>{{ check.current }}</code></td>
+												<td>{{ check.recommended }}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</sw-card>
+
+							<sw-card :title="$tc('cws-development-tools.index.systemStatus.runtimeTitle')">
 								<div class="cws-development-tools-index__status-grid">
 									<div v-for="item in systemStatusItems" :key="item[0]" class="cws-development-tools-index__status-item">
 										<strong>{{ item[1] }}</strong>

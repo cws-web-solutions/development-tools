@@ -1,3 +1,13 @@
+### [1.2.0]
+
+- Der Systemstatus wurde zu einem Live-Health-Dashboard mit Schweregradübersicht und empfohlenen Werten erweitert.
+- Unabhängige Prüfungen für Umgebung, Debug-Modus, PHP, Memory-Limit, OPcache, PCRE JIT, erforderliche PHP-Erweiterungen, Datenbank, Message Queue und Scheduled Tasks wurden hinzugefügt.
+- Responsive, nach Schweregrad sortierte Health-Ergebnisse mit englischen und deutschen Administration-Labels wurden hinzugefügt.
+- Jede Health-Prüfung ist isoliert, sodass nicht verfügbare Diagnosen das Laden des restlichen Systemstatus nicht verhindern.
+- Das Media-Fallback-Rewriting für relative Shopware-Media- und Thumbnail-URLs wurde korrigiert.
+- Die Erkennung lokaler Medien verwendet nun das Public-Verzeichnis des Projekts statt des Prozess-Arbeitsverzeichnisses.
+- Query-Strings und Fragmente bleiben beim Erzeugen von Fallback-Media-URLs erhalten.
+
 ### [1.1.2]
 
 - Der Administration-Shortcut-Wrapper beeinflusst die Backend-Layout-Höhe in Shopware 6.6 nicht mehr.

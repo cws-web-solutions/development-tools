@@ -27,16 +27,20 @@ class FrontendSubscriber implements EventSubscriberInterface
 
     private RequestStack $requestStack;
 
+    private string $publicDir;
+
     public function __construct(
         SystemConfigService $systemConfigService,
         string $environment,
         Filesystem $filesystem,
-        RequestStack $requestStack
+        RequestStack $requestStack,
+        string $projectDir
     ) {
         $this->systemConfigService = $systemConfigService;
         $this->environment = $environment;
         $this->filesystem = $filesystem;
         $this->requestStack = $requestStack;
+        $this->publicDir = rtrim($projectDir, '/') . '/public';
     }
 
     public static function getSubscribedEvents(): array
@@ -81,9 +85,7 @@ class FrontendSubscriber implements EventSubscriberInterface
         foreach ($medias as $media) {
             $mediaUrl = $media->getUrl();
             if ($mediaUrl && !$this->fileExists($mediaUrl)) {
-                $media->setUrl(
-                    str_replace($mediaUrlResolverHostFind, $mediaUrlResolverHostReplace, $mediaUrl)
-                );
+                $media->setUrl($this->buildFallbackUrl($mediaUrl, $mediaUrlResolverHostFind, $mediaUrlResolverHostReplace));
             }
 
             /** @var MediaCollection $thumbnails */
@@ -93,7 +95,7 @@ class FrontendSubscriber implements EventSubscriberInterface
                 $thumbnailUrl = $thumbnail->getUrl();
                 if ($thumbnailUrl && !$this->fileExists($thumbnailUrl)) {
                     $thumbnail->setUrl(
-                        str_replace($mediaUrlResolverHostFind, $mediaUrlResolverHostReplace, $thumbnailUrl)
+                        $this->buildFallbackUrl($thumbnailUrl, $mediaUrlResolverHostFind, $mediaUrlResolverHostReplace)
                     );
                 }
             }
@@ -123,14 +125,33 @@ class FrontendSubscriber implements EventSubscriberInterface
     private function fileExists(string $filePath): bool
     {
         $path = parse_url($filePath, PHP_URL_PATH);
-        if ($path === null) {
+        if (!\is_string($path) || $path === '') {
             return false;
         }
 
-        $path = str_replace('/media/', '', $path);
-        $physicalPath = \sprintf('%s/media/%s', getcwd(), $path);
+        $physicalPath = $this->publicDir . '/' . ltrim(rawurldecode($path), '/');
 
         return $this->filesystem->exists($physicalPath);
+    }
+
+    private function buildFallbackUrl(string $url, string $currentHost, string $fallbackHost): string
+    {
+        if (str_starts_with($url, $currentHost)) {
+            return $fallbackHost . substr($url, \strlen($currentHost));
+        }
+
+        $path = parse_url($url, PHP_URL_PATH);
+        if (!\is_string($path) || $path === '') {
+            return $url;
+        }
+
+        $query = parse_url($url, PHP_URL_QUERY);
+        $fragment = parse_url($url, PHP_URL_FRAGMENT);
+
+        return $fallbackHost
+            . '/' . ltrim($path, '/')
+            . (\is_string($query) && $query !== '' ? '?' . $query : '')
+            . (\is_string($fragment) && $fragment !== '' ? '#' . $fragment : '');
     }
 
     private function normalizeBoolean(mixed $value): ?bool

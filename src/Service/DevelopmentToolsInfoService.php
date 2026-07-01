@@ -22,7 +22,8 @@ final class DevelopmentToolsInfoService
     public function __construct(
         string $environment,
         string $projectDir,
-        SystemConfigService $systemConfigService
+        SystemConfigService $systemConfigService,
+        private readonly SystemHealthService $systemHealthService
     ) {
         $this->environment = $environment;
         $this->projectDir = $projectDir;
@@ -46,6 +47,7 @@ final class DevelopmentToolsInfoService
      *     },
      *     storefrontToolbar: array{visible: bool, configKey: string, scope: string},
      *     systemStatus: array<string, mixed>,
+     *     healthChecks: array<int, array{id: string, status: string, name: string, current: string, recommended: string}>,
      *     documentation: array<string, mixed>
      * }
      */
@@ -84,6 +86,7 @@ final class DevelopmentToolsInfoService
                 'scope' => 'APP_ENV=dev',
             ],
             'systemStatus' => $this->getSystemStatus(),
+            'healthChecks' => $this->systemHealthService->collect(),
             'documentation' => $this->loadDocumentation(),
         ];
     }
